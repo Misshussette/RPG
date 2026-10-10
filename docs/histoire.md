@@ -2,7 +2,7 @@
 
 ## État
 
-**Le jeu s'appelle L’Éclipse Blanche.** Son logo officiel a été fourni en versions sur fond noir et blanc. **L'univers, les personnages, les lieux, les maisons et le récit n'ont pas encore été définis.** Aucun nom provisoire extérieur au projet ne doit servir de référence narrative.
+**Le jeu s'appelle L’Éclipse Blanche.** Son logo officiel a été fourni en versions sur fond noir et blanc. **Orientation : adapter au RPG l'univers original déjà développé pour la saga de livres-jeux L’Éclipse Blanche, notamment son mélange de fantastique, de quotidien contemporain et d'humour absurde.** La transposition précise des personnages, des lieux, de la chronologie et des intrigues reste à concevoir. Aucun nom provisoire extérieur au projet ne doit servir de référence narrative.
 
 ## Architecture narrative recherchée
 
@@ -39,3 +39,13 @@ Les succès déjà accomplis restent acquis au fil des Renaissances. Les objecti
 ## À écrire
 
 Synopsis, mythe de la Renaissance, protagoniste, factions/maisons, chapitres, quêtes principales, boss, système des succès, conditions narratives d'accès au statut divin.
+
+## Transposition depuis les livres-jeux — pistes de travail
+
+L'univers littéraire est une source créative originale du projet : représentations collectives capables d'influer sur la réalité, créatures folkloriques et absurdités du quotidien. La transposition au RPG doit être conçue en fonction des activités, quêtes et mécaniques de Renaissance, sans reprendre mécaniquement les règles du livre.
+
+Exemples d'armes à classifier (propositions, non validées) : nunchaku de saucisses et charentaise malodorante (mêlée), lance-pantoufles (distance), micro de karaoké et canard Coin-Coin (magie), Petit Robert (mêlée). Une arme garde une catégorie principale même si ses effets secondaires relèvent d'une autre famille.
+
+## Indépendance du développement
+
+Le RPG s'inspire de mécaniques de jeux étudiés mais doit posséder son propre code, ses graphismes, ses données et son récit. L'accès au code d'un tiers n'autorise pas sa réutilisation sans licence ou permission applicable.
