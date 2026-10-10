@@ -2,6 +2,11 @@
 
 Ce registre distingue les **règles retenues dans nos échanges** des **orientations** et **valeurs d'exemple** encore à arbitrer. Une valeur illustrative n'est jamais une règle validée.
 
+## Identité du projet
+
+- Nom officiel : **L’Éclipse Blanche**.
+- Logo officiel fourni par le créateur en deux variantes : fond noir et fond blanc. Fichiers à intégrer dans le dépôt.
+
 ## Règles retenues
 
 1. La Renaissance réinitialise la progression concernée mais conserve l'identité et l'histoire du personnage.
