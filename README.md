@@ -1,4 +1,8 @@
-# RPG — Document de conception
+# L’Éclipse Blanche — Document de conception
+
+**Nom officiel du jeu : L’Éclipse Blanche.**
+
+Le logo officiel a été fourni sous deux variantes (fond noir et fond blanc). Son intégration comme fichier image dans le dépôt reste à effectuer.
 
 Projet de jeu de rôle à progression persistante, orienté exploration, combat, artisanat et activités de récolte, avec une dimension communautaire facultative.
 
