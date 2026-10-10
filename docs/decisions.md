@@ -45,3 +45,14 @@ Ce registre distingue les **règles retenues dans nos échanges** des **orientat
 6. Formule des contributions et récompenses de boss ; traitement d'un butin de palier +1.
 7. Conditions des 100 % de succès nécessaires à la divinité.
 8. Réglementation des échanges, enchères, prix et fraudes.
+
+## Modèle commercial — orientation validée le 10 octobre 2026
+
+- **Aucun achat d'or du jeu** contre de l'argent réel ; l'or reste gagné par les activités et les combats.
+- **Crédits premium** achetables en euros, réservés à une boutique d'équipements spéciaux et de services à définir. Les crédits ne sont pas une monnaie du marché entre joueurs ; les articles premium ne doivent pas permettre de contourner les règles de transferts et de bénédiction.
+- **Mode rapide (Fast Mode)** proposé par **abonnement hebdomadaire ou mensuel**. Prix, multiplicateurs, activités éligibles, cumul avec d'autres bonus et éventuels plafonds sont à définir et tester ; éviter de rendre les combats communautaires injustes.
+- Le jeu de base doit permettre de progresser et d'atteindre R20 sans paiement ; payer accélère certaines activités, mais ne valide pas directement les faits d'armes, quêtes ou objectifs de Renaissance.
+- **Abonnement** : afficher prix TTC, période, date de reconduction, fonctionnement du renouvellement automatique et moyen simple de résilier. La résiliation empêche les prochains prélèvements ; les droits déjà payés courent selon les conditions applicables.
+- **Remboursements et rétractation** : volonté commerciale de ne pas proposer de remboursement de convenance pour des contenus immédiatement délivrés, **dans la limite des lois applicables**. Une clause « aucun remboursement » ne supprime ni les droits légaux ni les recours liés aux défauts, fraudes ou paiements indus. Obtenir les consentements spécifiques et confirmations nécessaires avant la fourniture numérique et vérifier séparément les règles des abonnements.
+- Tout paiement et droit premium est attribué et vérifié côté serveur, avec historique, prévention des doublons et correction en cas de rétrofacturation.
+- **Distribution sans Steam**, via navigateur et éventuellement application PC indépendante ; hébergement VPS envisagé, à confirmer techniquement.
