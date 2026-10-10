@@ -1,31 +1,61 @@
-# L’Éclipse Blanche — Document de conception
+# L’ÉCLIPSE BLANCHE — Première alpha solo
 
-**Nom officiel du jeu : L’Éclipse Blanche.**
+Un RPG narratif et décalé dans un monde où les représentations collectives peuvent modifier la réalité.
 
-Le logo officiel a été fourni sous deux variantes (fond noir et fond blanc). Son intégration comme fichier image dans le dépôt reste à effectuer.
+> **État : prototype jouable en solo.** Aucun serveur partagé, aucune boutique, aucun paiement, aucune Renaissance et aucun compte utilisateur ne sont encore actifs. Les règles et les visuels de cette alpha sont originaux au projet ; aucune portion de code de référence tierce n'est intégrée.
 
-Projet de jeu de rôle à progression persistante, orienté exploration, combat, artisanat et activités de récolte, avec une dimension communautaire facultative.
+## Démarrer
 
-> **Statut :** conception fonctionnelle. Les règles validées sont séparées des hypothèses d'équilibrage. Le nom, l'univers et l'histoire restent à définir.
+```powershell
+git clone https://github.com/Misshussette/RPG.git
+cd RPG
+npm install
+npm run dev
+```
 
-## Vision
+Ouvrir l'adresse locale fournie par Vite. Pour lancer les tests automatiques :
 
-- Donner envie de revenir jouer, récolter et faire progresser son personnage sans imposer une présence continue.
-- Respecter le temps investi : faits d'armes, découvertes et succès restent acquis au fil des Renaissances.
-- Une donnée n'est enregistrée qu'une fois puis réutilisée partout : identité du joueur, historique des exploits, objets, transactions et Codex.
-- Construire une expérience principalement jouable en solo, enrichie par les échanges, les guildes et les événements communs, sans obligation de participer à un MMORPG classique.
-- Afficher avant chaque dépense les conséquences exactes d'une action.
+```powershell
+npm test
+```
 
-## Documentation
+L'application fonctionne en JavaScript natif ; elle peut également être servie par un serveur statique HTTP local sans étape de compilation (ne pas ouvrir directement `index.html` en `file://`).
 
-| Sujet | Document |
-|---|---|
-| Renaissances et accomplissements | [docs/renaissance.md](docs/renaissance.md) |
-| Combats et boss mondiaux | [docs/combat.md](docs/combat.md) |
-| Équipements et bénédictions | [docs/equipements.md](docs/equipements.md) |
-| Économie, commerce, inventaire | [docs/economie.md](docs/economie.md) |
-| Compétences et récolte hors ligne | [docs/progression.md](docs/progression.md) |
-| Univers, quêtes, Codex et succès | [docs/histoire.md](docs/histoire.md) |
-| Décisions et sujets ouverts | [docs/decisions.md](docs/decisions.md) |
+## Jouable aujourd'hui
 
-Aucun code de jeu n'est implémenté à ce stade.
+- Création d'un personnage et choix **mêlée / distance / magie**.
+- **Quatre monstres** originaux, débloqués au fil des victoires.
+- **Combat automatique** par tours ; possibilité d'enchaîner les combats tant que le jeu reste ouvert et que la santé le permet.
+- Expérience, niveaux, santé, repos, or, butin, armes équipables.
+- Trois quêtes, récompenses et progression permanente dans le Codex.
+- Récolte hors ligne de papiers de rumeur et d'or, **plafonnée à deux heures** dans ce prototype ; réclamation manuelle.
+- Inventaire de 16 places initiales (**l'or occupe une place**), agrandissement de +8 places pour 150 or.
+- Sauvegarde locale automatique dans le navigateur, export et import JSON avec validations.
+- Interface responsive et utilisable sans compte.
+
+## Ce qui vient ensuite
+
+Enrichir l'histoire, ajouter l'artisanat, la banque, la progression profonde, les Renaissances et les accomplissements. Construire **séparément** une API autoritaire et une base de données pour le vrai multijoueur. La progression solo ne doit pas pouvoir fabriquer des ressources sur le marché connecté.
+
+Le modèle commercial envisagé repose sur des crédits spéciaux et un mode rapide sur abonnement. **Aucune fonctionnalité payante n'est implémentée** : cela exige une infrastructure sécurisée, des contrôles côté serveur et une validation juridique avant commercialisation.
+
+## Architecture
+
+- `src/game/data.js` : définitions canoniques des objets, monstres, quêtes et disciplines.
+- `src/game/engine.js` : règles et mutations d'état testables sans navigateur.
+- `src/main.js` : interface, interactions et sauvegarde locale.
+- `src/style.css` : identité visuelle et mise en page adaptative.
+- `tests/game.test.js` : tests natifs Node.js sans dépendance de test.
+- `docs/` : règles, décisions et feuilles de route du projet.
+
+Les mécanismes et chiffres de cette alpha servent à éprouver la boucle du jeu. Ils ne remplacent pas les décisions documentées concernant les équipements exceptionnels, les bénédictions et la Renaissance.
+
+## Documents de conception
+
+- [Règles de combat](docs/combat.md)
+- [Équipements](docs/equipements.md)
+- [Économie](docs/economie.md)
+- [Progression](docs/progression.md)
+- [Renaissances](docs/renaissance.md)
+- [Univers et histoire](docs/histoire.md)
+- [Décisions et points à arbitrer](docs/decisions.md)
