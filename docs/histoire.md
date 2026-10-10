@@ -2,7 +2,7 @@
 
 ## État
 
-**L'univers, les personnages, les lieux, les maisons et le récit n'ont pas encore été définis.** Aucun nom provisoire extérieur au projet ne doit servir de référence narrative.
+**Le jeu s'appelle L’Éclipse Blanche.** Son logo officiel a été fourni en versions sur fond noir et blanc. **L'univers, les personnages, les lieux, les maisons et le récit n'ont pas encore été définis.** Aucun nom provisoire extérieur au projet ne doit servir de référence narrative.
 
 ## Architecture narrative recherchée
 
