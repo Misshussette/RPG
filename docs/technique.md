@@ -34,3 +34,13 @@ La commande `npm install` installe les dépendances déclarées dans `package.js
 ## Décisions non prises
 
 Framework UI, serveur/API, base de données, authentification, hébergement, mécanismes anti-triche, stratégie de sauvegarde et déploiement. Aucun choix ne doit être présenté comme validé avant discussion.
+
+## Implémentation actuelle — Alpha solo 0.1.0
+
+La première alpha a été développée et publiée. Le client s'exécute dans le navigateur en JavaScript ES Modules natif, empaquetable avec Vite. Le moteur n'utilise aucune logique tierce recopiée. Le frontend dispose déjà d'une interface responsive et d'une sauvegarde locale, et des tests natifs Node.js couvrent les principales règles.
+
+Pour lancer : `npm install`, puis `npm run dev`. Pour tester : `npm test`.
+
+**Cette alpha n'inclut pas de backend, de comptes, de multijoueur, de paiements, de boutique ou de Fast Mode.** Le protocole serveur et la base PostgreSQL restent une phase distincte. La distribution est web/PC sans Steam.
+
+Consulter [l'état de l'alpha](implementation-alpha.md) pour le détail.
