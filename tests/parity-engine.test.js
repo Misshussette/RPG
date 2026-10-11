@@ -74,3 +74,23 @@ test('commandes étrangères refusées, aucune modification de l’état source'
  assert.ok(runCharacterAction(x,{action:'start',activityId:'missing'},t0).error);
  assert.deepEqual(x,copy);
 });
+
+test('statistiques : les 17 niveaux initiaux ne sont pas des niveaux gagnés',()=>{
+ const x=fresh();
+ const start=viewCharacter(x);
+ assert.equal(start.totalLevel,17);
+ assert.equal(start.levelsGained,0);
+ assert.equal(start.skillsAdvanced,0);
+ assert.equal(start.combatLevel,1);
+ x.skills.mining=XP_THRESHOLDS[1];
+ const advanced=viewCharacter(x);
+ assert.equal(advanced.totalLevel,18);
+ assert.equal(advanced.levelsGained,1);
+ assert.equal(advanced.skillsAdvanced,1);
+ assert.equal(advanced.combatLevel,1);
+ assert.equal(x.skills.mining,XP_THRESHOLDS[1]); // Lecture sans mutation de la sauvegarde
+ x.skills.fishing=XP_THRESHOLDS[2];
+ const twice=viewCharacter(x);
+ assert.equal(twice.levelsGained,3);
+ assert.equal(twice.skillsAdvanced,2);
+});
