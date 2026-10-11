@@ -96,3 +96,14 @@ La version 0.2.0 décrit le début de la transition vers une application exclusi
 - [Matrice de parité](docs/audit/matrice-parite.md) : état exact de l'alpha vs fonctionnalités visées, critères d'acceptation et ordre de reconstruction React/serveur.
 
 **Précision :** inventaire statique du code fourni, non une validation de parité jouable. L'archive réduite ne contient pas les images externes. La phase suivante consiste à auditer les formules et comportements de chaque système et à construire les tests de reconstruction. Aucun code ni contenu tiers brut n'a été importé dans ce dépôt.
+
+## Audit comportemental du moteur — 11 octobre 2026
+
+L'[audit fonctionnel initial](docs/audit/inventaire-fonctionnel.md) est complété par quatre documents :
+
+- [Compétences, XP, passifs, Renaissance](docs/audit/comportement-competences.md)
+- [Combat, équipements et magie](docs/audit/comportement-combat.md)
+- [Activités, fabrication, stockage et progression en absence](docs/audit/comportement-activites.md)
+- [Contrats de tests de parité](docs/audit/contrats-tests-parite.md)
+
+Ces documents sont des constats techniques d'analyse statique et une spécification de vérification, pas une preuve de compatibilité exécutée ni un transfert du code de référence. Ils soulignent aussi les écarts entre anciens commentaires et règles réellement implémentées.
