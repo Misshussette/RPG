@@ -107,3 +107,15 @@ L'[audit fonctionnel initial](docs/audit/inventaire-fonctionnel.md) est complét
 - [Contrats de tests de parité](docs/audit/contrats-tests-parite.md)
 
 Ces documents sont des constats techniques d'analyse statique et une spécification de vérification, pas une preuve de compatibilité exécutée ni un transfert du code de référence. Ils soulignent aussi les écarts entre anciens commentaires et règles réellement implémentées.
+
+## Reconstruction React / serveur — version 0.3.0 (11 octobre 2026)
+
+**Le chantier de parité démarre.** Il est disponible à `/parity.html` sans remplacer la sauvegarde locale historique. [Guide de test de la tranche React](docs/lot-01-socle-react-serveur.md).
+
+- 17 compétences à XP indépendants et leur véritable courbe de niveaux.
+- 13 emplacements d'équipement et **16 cases initiales d'inventaire** (or inclus).
+- React 19 ; création du personnage et progression via API Node/PostgreSQL, non via `localStorage`.
+- Première boucle serveur réellement implémentée : extraction, bûcheronnage et pêche ; horloge serveur, progression pendant l'absence et transaction par personnage.
+- `server/sql/002_parity_engine.sql` à exécuter **après** `001_initial.sql`. Deux terminaux nécessaires pour API et Vite. Aucune migration automatique de l'ancien personnage n'est effectuée.
+
+**Limites :** les autres 14 compétences sont présentes dans le modèle mais sans leurs moteurs spécifiques. Le combat et l'économie multijoueur ne sont pas implémentés dans cette nouvelle tranche. Le backend n'est pas prêt pour le public ; tests PostgreSQL réels et audit de sécurité à faire. Le prototype précédent reste accessible sur `/` et n'est pas une preuve de parité.
