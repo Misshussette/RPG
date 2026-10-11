@@ -11,8 +11,7 @@ Regroupements d'interface envisagés :
 
 | Atelier/lieu visible — noms provisoires | Fonctions réunies | Compétences qui restent distinctes |
 |---|---|---|
-| Mine & Fonderie | Extraction, raffinage des minerais, fabrication des lingots ; combustible uniquement si la recette en exige | Extraction, Métallurgie ; éventuellement Allumage si la recette y fait réellement appel |
-| Forêt & Bois | Coupe des arbres, production de bûches et autres ressources forestières ; accès à leur utilisation dans les recettes | **Bûcheronnage**, compétence indépendante, à ne pas oublier ni fondre dans l'Artisanat |
+| Ressources & Fonderie (ou Mine & Fonderie, nom à choisir) | Extraction, **bûcheronnage**, minerais, bois, raffinage et fabrication des lingots ; combustible uniquement si la recette en exige | Extraction, **Bûcheronnage**, Métallurgie ; éventuellement Allumage si la recette y fait réellement appel |
 | Armurerie | Armes, armures, arcs, flèches, assemblages ; forge conventionnelle ; consommation de bois et lingots déjà produits | Métallurgie pour les objets métalliques, Artisanat, Arcs et flèches ; le Bûcheronnage reste acquis à l'étape de collecte |
 | Culture & Alchimie | Culture, récolte, préparation de potions et mixtures | Culture et autres compétences pertinentes selon les recettes ; alchimie à concevoir, pas à créer artificiellement comme une 18e compétence |
 | Cuisine & Pêche | Pêche, transformation des prises, plats et consommables | Pêche et Cuisine |
@@ -71,6 +70,39 @@ L'usage des ressources disponibles n'autorise pas à ignorer les **prérequis de
 - Éviter les boucles de dépendance dans les recettes et plafonner le travail serveur par commande.
 
 **Tests prioritaires :** prérequis insuffisant, pioche admissible mais lente, stock déjà en banque, achat partiel, même matière requise par deux étapes, deux commandes simultanées, déconnexion, redémarrage serveur, recette rééquilibrée, annulation, dépassement de capacité et absence de gains doublés.
+
+## 2 bis. Bois, flèches et équité entre styles de combat — pistes à éprouver
+
+**Constat de la référence auditée** : à distance, le combat vérifie un arc et des munitions puis **consomme une flèche par attaque** ; sans flèches, le combat s'interrompt. En magie, le sort sélectionné est limité par le niveau et modifie la puissance ; le flux audité ne documente **aucun coût de mana ou de composant consommable à chaque attaque magique**. La mêlée n'a pas de consommable par frappe. Les protections alimentées par la Crémation consomment des charges par tour **quel que soit le style utilisé**. Voir [audit de combat](audit/comportement-combat.md). Ne pas inventer un coût magique existant.
+
+### Une chaîne du bois asymétrique selon la destination
+
+- **Allumage direct** : bûche brute → feu. Ne pas ajouter de transformation artificielle obligatoire pour allumer un feu.
+- **Fabrication d'arcs et de flèches** : bûche → **bois travaillé / hampes** (transformation facultative selon recette) → flèches avec pointes et/ou plumes selon tier ; bois → composants d'arc → arc. La forme exacte des recettes, le niveau de compétence requis, le nombre de produits par lot et les composants restent **à décider**.
+- Éviter d'exiger un **lingot** pour chaque flèche ordinaire dès le début : privilégier, à tester, des flèches simples sans métal, fabriquées en lots importants, puis des projectiles spécialisés plus chers et puissants.
+- La catégorie d'interface **Ressources & Fonderie** peut réunir extraction et bûcheronnage, sans les fusionner en compétence ; l'Armurerie utilise ces stocks sans les dupliquer.
+
+### Asymétrie équitable plutôt que coût identique
+
+| Style | État de la référence auditée | Options propres à notre jeu, NON VALIDÉES |
+|---|---|---|
+| **Distance** | Arc et flèches indispensables ; une flèche dépensée par attaque | Flèches simples obtenues facilement en gros lots ; **récupération partielle** de munitions après combat ; munitions de qualité avec recettes avancées, effets spécifiques et vrai coût d'opportunité. |
+| **Mêlée / Défense** | Arme sans munition par coup | Risque de proximité et consommation de soin comme contrainte principale ; éventuellement **usure réparable** à une fréquence faible, seulement si cela apporte du jeu et non de la corvée. |
+| **Magie** | Bâton, sorts conditionnés par niveau ; aucun coût de mana par attaque prouvé dans le flux audité | **Ressource d'énergie qui se régénère** ou charges spécifiques pour sorts très puissants, buffs, effets de zone ; éviter d'obliger à récolter un composant commun à chaque attaque. |
+
+**Décision de méthode, sans chiffres imposés** : ne pas affaiblir automatiquement Mêlée et Magie pour « punir » les autres styles ; chercher d'abord à réduire les tâches répétitives de l'archer et lui donner des avantages tangibles en combat (portée, efficacité sur certaines cibles, types de projectiles, cadence, effet tactique). Les styles ont des **contraintes et des avantages distincts**, pas nécessairement des dépenses de consommables rigoureusement identiques. L'effort de préparation des flèches doit être intégré au calcul de performance.
+
+### Tests d'équilibre à mener avant validation
+
+Mesurer en solo et en coopération, sur des rencontres comparables et avec équipement de même palier :
+
+- **Dégâts efficaces / heure réelle** = dégâts infligés en tenant compte de la précision, des cadences, des morts et du temps de préparation/approvisionnement.
+- **Coût en or, ressources et temps** par combat, par heure d'activité et par boss pour chaque style : soins, réparation éventuelle, consommables, flèches perdues/récupérées, disponibilité du stock.
+- Progression XP/heure, temps d'arrêt, survie, capacité à enchaîner les combats, rôles et complémentarité en boss ; efficacité en début R0 puis à plusieurs paliers R et niveaux d'équipement.
+- Contrôle des cas où les projectiles sont gratuits/récupérables (absence de création d'objets ni exploitation de la récupération), où le joueur change de style et où les recettes consomment du stock intermédiaire.
+- Une option « fabriquer automatiquement les flèches manquantes » doit rester soumise au **plan de production et aux prérequis serveur** décrits plus haut, avec accord sur les achats ; aucun approvisionnement virtuel offert en plein combat.
+
+**À arbitrer avec le créateur :** existence et forme d'une ressource magique, usure des armes, taux de récupération des flèches, fabrication de hampes, quantité de projectiles par recette, avantages tactiques propres aux styles et seuils de rééquilibrage. **Aucune de ces valeurs n'est validée par cette note.**
 
 ## 3. Marché et enchères : choix à arbitrer
 
