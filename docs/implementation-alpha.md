@@ -37,3 +37,10 @@ npm test
 4. Ajouter artisanat, banque, progression des activités et protection du butin rare lors des débordements.
 5. Modéliser la Renaissance sans remettre en cause les succès permanents et équipements bénis.
 6. Construire l'API et PostgreSQL pour le vrai monde partagé. Ajouter Stripe **uniquement côté serveur**, après revue sécurité et conformité.
+## Correctif anti-triche — 11 octobre 2026
+
+- Retrait de l'import et de l'export de sauvegarde depuis l'interface de l'alpha. Ce retrait **n'empêche pas** la modification de la sauvegarde locale par un joueur averti.
+- Le stockage local est provisoire et non fiable. Les données d'un personnage solo ne doivent jamais être utilisées comme preuve de progression, de récompense ou d'achat en mode connecté.
+- Les quatre monstres présents sont uniquement des données de démonstration, **pas** un plafond ou une décision de conception du bestiaire.
+- Avant tout lancement connecté : serveur autoritaire pour actions de combat, tirages, récompenses, inventaire, expérience, quêtes, temps hors ligne, crédits premium et transactions ; horloge serveur, transactions atomiques, limitations de cadence, journalisation et idempotence.
+- La protection anti-triche du solo entièrement hors ligne ne peut être absolue. Le solo peut rester isolé, sans marché ni transfert vers le multijoueur.
