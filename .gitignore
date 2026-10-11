@@ -5,3 +5,9 @@ dist/
 !.env.example
 *.log
 .DS_Store
+
+# Sources de référence privées et données locales — jamais dans GitHub.
+private-reference/
+*.asar
+eclipse-sources.zip
+Eclipse_Blanche_Reference_Privee.zip
