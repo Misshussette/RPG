@@ -135,3 +135,9 @@ Pour pouvoir confronter la totalité des mécanismes à l'application étudiée,
 ## Pistes de conception : ateliers, fabrication automatisée et marché (11 octobre 2026)
 
 Voir [l'organisation des métiers, les commandes de fabrication en chaîne, le marché offre/demande et l'humour contextualisé](docs/conception-ateliers-production-marche.md). **Pistes à tester**, pas des seuils validés : garder les 17 compétences, conserver la richesse fonctionnelle de la référence, simplifier **la navigation** et non les mécanismes. R0 ne doit pas nécessairement tout accomplir.
+
+## Interface React 0.3.3 — première refonte de navigation (11 octobre 2026)
+
+L'écran `/parity.html` organise désormais les 17 compétences par **lieux fonctionnels** : Combat & Donjons ; Ressources & Fonderie (avec **bûcheronnage**) ; Armurerie ; Pêche & Cuisine ; Culture & Alchimie ; Feux & Rituels ; Chasse & Contrats ; Larcins. La **Métallurgie** apparaît dans Ressources et Armurerie mais conserve **un seul identifiant et un seul XP**. Les compétences restent jouables ou non selon la progression réelle du moteur, pas selon un bouton fictif. Les trois récoltes serveur fonctionnelles sont filtrées selon le lieu sélectionné. Inventaire, sauvegardes et API restent inchangés ; **aucune migration SQL**. La référence privée locale `4174` demeure intacte.
+
+Tests ajoutés pour la couverture des 17 compétences, les regroupements sans doublons et l'accessibilité des activités existantes. Guide : [organisation de l'interface V1](docs/organisation-interface-v1.md). **L'interface n'est pas encore une parité complète ; cette version sert à tester l'organisation avant de poursuivre la reconstruction des moteurs.** La limite de refus d'une revanche a également été fixée à **3**, dans la documentation seulement, sans moteur de revanche implémenté.
