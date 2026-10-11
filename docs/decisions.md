@@ -56,3 +56,12 @@ Ce registre distingue les **règles retenues dans nos échanges** des **orientat
 - **Remboursements et rétractation** : volonté commerciale de ne pas proposer de remboursement de convenance pour des contenus immédiatement délivrés, **dans la limite des lois applicables**. Une clause « aucun remboursement » ne supprime ni les droits légaux ni les recours liés aux défauts, fraudes ou paiements indus. Obtenir les consentements spécifiques et confirmations nécessaires avant la fourniture numérique et vérifier séparément les règles des abonnements.
 - Tout paiement et droit premium est attribué et vérifié côté serveur, avec historique, prévention des doublons et correction en cas de rétrofacturation.
 - **Distribution sans Steam**, via navigateur et éventuellement application PC indépendante ; hébergement VPS envisagé, à confirmer techniquement.
+
+## Sécurité et anti-triche — décision du 11 octobre 2026
+
+- Priorité haute : ne jamais exposer une économie ou progression multijoueur fondée sur la confiance dans le client.
+- **Serveur autoritaire** pour combats, niveaux, gains, objets, marché, boss mondiaux, abonnements et crédits premium. Le client soumet des intentions ; le serveur valide et applique, sans accepter un état final calculé par le client.
+- **Solo hors ligne isolé** du monde connecté : aucune importation de personnages ni conversion des gains locaux vers le multijoueur. On ne peut pas garantir qu'une sauvegarde sur un appareil contrôlé par le joueur résiste à toute modification.
+- **Retrait des fonctions d'import/export de sauvegarde** de l'alpha actuelle ; cela réduit un vecteur évident sans constituer une protection complète.
+- Le nombre de monstres dans une alpha ne limite pas le futur bestiaire. Quatre créatures représentent uniquement le contenu temporaire du prototype.
+- Contrôles nécessaires : temps et RNG serveur, transaction de données atomique, contrôle de droits et de fréquence, journal d'audit et gestion des rejouements.
