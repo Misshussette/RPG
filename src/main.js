@@ -62,7 +62,7 @@ function welcome() {
 const menus = [ ['camp', '◈', 'Vue d’ensemble'], ['combat', '⚔', 'Combats'], ['quests', '✧', 'Quêtes'], ['inventory', '▣', 'Inventaire'], ['codex', '▤', 'Codex'] ];
 
 function sidebar() {
-  return `<aside class="sidebar"><div class="brand">${eclipse()}<div><span class="brand-small">UN MONDE QUI DOUTE</span><strong>L’ÉCLIPSE <i>BLANCHE</i></strong></div></div><div class="sidebar-label">EXPLORER</div><nav class="navigation" aria-label="Navigation principale">${menus.map(([id, icon, title]) => `<button type="button" data-view="${id}" class="nav-item ${view === id ? 'selected' : ''}" ${view === id ? 'aria-current="page"' : ''}><span class="nav-icon">${icon}</span><span>${title}</span>${id === 'quests' && questStatus(game).some(q => q.progress >= q.goal && !q.claimed) ? '<span class="nav-bubble">!</span>' : ''}</button>`).join('')}</nav><div class="sidebar-bottom"><div class="online-indicator"><span></span> MODE SOLO · LOCAL</div><p>La ville change, même quand vous ne la regardez pas.</p></div></aside>`;
+  return `<aside class="sidebar"><div class="brand">${eclipse()}<div><span class="brand-small">UN MONDE QUI DOUTE</span><strong>L’ÉCLIPSE <i>BLANCHE</i></strong></div></div><div class="sidebar-label">EXPLORER</div><nav class="navigation" aria-label="Navigation principale">${menus.map(([id, icon, title]) => `<button type="button" data-view="${id}" class="nav-item ${view === id ? 'selected' : ''}" ${view === id ? 'aria-current="page"' : ''}><span class="nav-icon">${icon}</span><span>${title}</span>${id === 'quests' && questStatus(game).some(q => q.progress >= q.goal && !q.claimed) ? '<span class="nav-bubble">!</span>' : ''}</button>`).join('')}</nav><div class="sidebar-bottom"><div class="online-indicator"><span></span> ALPHA 0.2.3 · SOLO LOCAL</div><p>Interface de test. Comptes et sauvegardes serveur en cours de développement.</p><button type="button" class="muted-button danger" data-action="reset">Recommencer</button></div></aside>`;
 }
 
 function header() {
@@ -129,14 +129,43 @@ function codex() {
 function sideInventory() {
   const entries = Object.entries(game.inventory).filter(([, amount]) => amount > 0);
   const slots = gameSummary(game).occupied;
-  return `<section class="quick-inventory"><div class="right-heading"><strong>INVENTAIRE</strong><span>${slots}/${game.inventoryCapacity}</span></div><div class="quick-grid"><div class="quick-item gold-slot" title="Pièces d’or"><span>◉</span><small>${number(game.hero.gold)}</small></div>${entries.map(([id, qty]) => { const item = ITEMS[id]; const equipped = game.equipment.weapon === id; const canEquip = item.type === 'weapon' && item.discipline === game.hero.discipline && !equipped; const use = item.type === 'consumable'; return `<button type="button" class="quick-item ${item.rarity} ${equipped?'equipped':''}" title="${safe(item.name)} — ${safe(item.description)}" ${canEquip || use ? `data-action="${use?'use':'equip'}" data-id="${id}"`: 'data-view="inventory"'}><span>${itemIcon(id)}</span><small>×${qty}</small></button>`; }).join('')}</div><button class="text-link quick-inventory-link" data-view="inventory">Gérer l’inventaire →</button></section>`;
+  const filled = [
+    { id: 'gold', qty: game.hero.gold, name: 'Pièces d’or', icon: '◉', kind: 'gold' },
+    ...entries.map(([id, qty]) => ({ id, qty, name: ITEMS[id].name, icon: itemIcon(id), kind: ITEMS[id].rarity })),
+  ];
+  const cells = Array.from({ length: game.inventoryCapacity }, (_, index) => {
+    const item = filled[index];
+    if (!item) return `<span class="quick-item empty-slot" aria-label="Emplacement ${index + 1} vide" title="Emplacement ${index + 1} — vide"><span></span></span>`;
+    if (item.id === 'gold') return `<div class="quick-item gold-slot" title="Or : ${number(item.qty)}"><span>◉</span><small>${number(item.qty)}</small></div>`;
+    const def = ITEMS[item.id];
+    const equipped = game.equipment.weapon === item.id;
+    const canEquip = def.type === 'weapon' && def.discipline === game.hero.discipline && !equipped;
+    const usable = def.type === 'consumable';
+    return `<button type="button" class="quick-item ${item.kind} ${equipped ? 'equipped' : ''}" aria-label="${safe(item.name)} : ${item.qty}" title="${safe(item.name)} — ${safe(def.description)}" ${canEquip || usable ? `data-action="${usable ? 'use' : 'equip'}" data-id="${item.id}"` : 'data-view="inventory"'}><span>${item.icon}</span><small>×${item.qty}</small></button>`;
+  }).join('');
+  return `<section class="quick-inventory"><div class="right-heading"><strong>INVENTAIRE</strong><span>${slots}/${game.inventoryCapacity}</span></div><div class="quick-grid" aria-label="Sac de ${game.inventoryCapacity} emplacements">${cells}</div><button class="text-link quick-inventory-link" data-view="inventory">Gérer l’inventaire →</button></section>`;
+}
+
+function sideActions() {
+  const pending = questStatus(game).filter(q => !q.claimed);
+  const ready = pending.filter(q => q.progress >= q.goal);
+  const quest = pending.find(q => q.progress < q.goal);
+  const gather = gatherPreview(game);
+  return `<section class="side-actions"><div class="activity-title">À FAIRE <span>${pending.length} quête(s)</span></div>
+    <div class="side-actions-list">
+      ${ready.map(q => `<button type="button" class="side-action actionable" data-action="claim" data-id="${q.id}"><strong>✓ ${safe(q.title)}</strong><small>Récompense à récupérer</small></button>`).join('')}
+      ${quest ? `<button type="button" class="side-action" data-view="quests"><strong>${safe(quest.title)}</strong><small>${quest.progress}/${quest.goal} · ${safe(quest.description)}</small></button>` : pending.length ? '' : '<div class="side-action"><strong>Quêtes terminées</strong><small>Revenez lors du prochain chapitre.</small></div>'}
+      ${gather.units ? `<button type="button" class="side-action actionable" data-action="gather"><strong>Récolte disponible</strong><small>+${gather.gold} or · +${gather.items} papier(s)</small></button>` : ''}
+      ${game.hero.hp < game.hero.maxHp ? `<button type="button" class="side-action" data-action="rest"><strong>Récupérer de la santé</strong><small>${game.hero.hp}/${game.hero.maxHp} PV · Auberge</small></button>` : ''}
+    </div>
+  </section>`;
 }
 
 function activityPanel() {
-  // Les événements sont conservés du plus récent au plus ancien dans le moteur ;
-  // l'affichage renverse cet ordre pour lire le journal du haut vers le bas.
+  // Le moteur conserve les événements les plus récents en premier.
+  // L'interface restitue un journal chronologique, lisible du haut vers le bas.
   const events = game.log.slice(0, 35).reverse();
-  return `<aside class="activity-sidebar">${sideInventory()}<section class="journal-section"><div class="activity-title">JOURNAL <span>${events.length} événements</span></div><div class="activity-entries" id="journal-feed" role="log" aria-live="off">${events.map((entry,index) => `<div class="activity-entry"><span class="activity-bullet ${index === events.length-1?'latest':''}"></span><p>${safe(entry.message)}</p></div>`).join('')}</div></section><div class="activity-foot"><div class="panel-eyebrow">ALPHA 0.2.2 · DÉVELOPPEMENT</div><p>Les comptes, sauvegardes serveur et paiements ne sont pas encore reliés à cette interface.</p><button class="muted-button danger" data-action="reset">Recommencer</button></div></aside>`;
+  return `<aside class="activity-sidebar">${sideInventory()}${sideActions()}<section class="journal-section"><div class="activity-title">JOURNAL <span>${events.length} événements</span></div><div class="activity-entries" id="journal-feed" role="log" aria-live="off">${events.map((entry,index) => `<div class="activity-entry"><span class="activity-bullet ${index === events.length-1?'latest':''}"></span><p>${safe(entry.message)}</p></div>`).join('')}</div></section></aside>`;
 }
 
 function render() {
