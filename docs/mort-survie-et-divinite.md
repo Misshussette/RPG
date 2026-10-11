@@ -15,26 +15,45 @@ Ce document concerne L'Éclipse Blanche : jeu en ligne avec **serveur autoritair
 - Le serveur évalue la condition **avant chaque nouveau tour/engagement où elle doit agir**, en même temps que la consommation d'objets et l'application des dégâts, sous transactions/idempotence. Exactement les **mêmes règles** pour joueur présent/absent ; l'écran ouvert ne crée aucun avantage non prévu. Si un événement a déjà causé une mort dans le tour en cours, l'automatisme ne remonte pas le temps.
 - Ne pas créer d'immunité automatique gratuite : sans acquisition, le joueur choisit manuellement le retrait pendant sa présence, prépare ses ressources et accepte les risques d'absence. L'arrêt peut prévenir les risques estimables mais **ne garantit pas** d'éviter un coup fatal inattendu.
 
-## 2. Échelle de gravité de la mort
+## 2. Défaite évolutive, pillage du sac et Hardcore volontaire — décisions du 11 octobre 2026
 
-**Proposition du créateur :** la mort définitive de la référence a un attrait (« une chance »), mais elle est trop punitive/décourageante si appliquée dès le début. La **réserver à un stade avancé** de progression/Renaissance, avec des objets de protection très rares.
+**Décision explicite du créateur :** ne **jamais** proposer « Normal / Hardcore » au moment de la création du personnage : il ne connaît pas encore suffisamment le jeu. La mort définitive ne doit **pas** être automatiquement imposée à partir d'une Renaissance, quel que soit le niveau atteint. Le joueur avance d'abord dans le mode ordinaire puis, **après avoir réellement acquis une maîtrise avancée du jeu**, peut choisir volontairement une voie **Hardcore à mort définitive**. Le critère d'accès, le caractère éventuellement irréversible du choix et l'équilibrage des récompenses restent à définir.
 
-| Phase | Orientation à tester, sans palier chiffré approuvé |
+### Progression des conséquences en mode ordinaire
+
+| Phase | Règle / orientation |
 |---|---|
-| Départ / R0 | Défaite réelle mais **non définitive** : blessures/soins, récupération, pertes encadrées ; conserver identité, savoirs acquis et progression suffisamment pour apprendre. |
-| Progression intermédiaire | Défaite plus coûteuse mais encore récupérable : objets abîmés, perte de ressources ou dette/récupération selon règles explicites. |
-| Hautes Renaissances | **Risque de mort définitive** : existence du personnage réellement menacée, seulement quand le joueur a reçu une information explicite, durable et non ambiguë sur le changement de régime. |
-| Divinité | Récompense possible : échappatoire permanente à la **mort définitive**, pas invincibilité, immunité aux dégâts, ni automatiquement victoire en combat. **À valider** comme portée du statut divin. |
+| **Début de partie** | Le personnage survit à la défaite : **le monstre pille le contenu de son sac**, tandis que **tout son équipement porté reste protégé**. Le personnage peut repartir ; aucune mort définitive. |
+| **Milieu de progression** | Le pillage du sac persiste, et la défaite peut faire perdre **une pièce d'équipement de faible palier d'abord**. Les détails (combien de pièces, sélection, équipement endommagé plutôt que perdu, objets protégés) doivent être testés et annoncés. |
+| **Haut niveau / Renaissance avancée, sans Hardcore** | La perte d'équipement peut devenir **plus sévère et porter sur des pièces plus puissantes**, tout en préservant l'existence du personnage. Aucun passage automatique en mort définitive. |
+| **Voie Hardcore choisie en connaissance de cause** | Des combats PvE admissibles peuvent entraîner une **mort définitive du personnage** si aucune protection valide n'agit. Les exceptions, le déploiement et l'accord explicite préalable doivent être clarifiés. |
+| **Divinité** | Une récompense possible, distincte de R20 : **échapper à la disparition définitive**, sans devenir invulnérable ni supprimer les conséquences ordinaires d'une défaite. À arbitrer dans le détail. |
 
-**Arbitrages encore indispensables :** seuil de niveau ou de R qui introduit la mort définitive ; maintien éventuel d'un mode volontaire hardcore plus tôt ; distinction mort du personnage / compte / collections historiques ; traitement des objets, des succès et des biens liés à un personnage mort ; récupération éventuelle à coût élevé hors reliques ; sanctions comparables entre combat actif et idle ; conséquences de PvP (aucune perte définitive involontaire due à la traque ou au harcèlement).
+- Le pillage concerne **les biens transportés dans le sac**, pas les ressources déjà déposées en banque ni les équipements portés protégés en début de partie. Les règles exactes pour **l'or (qui occupe une case du sac)**, les objets de quête ou liés, les consommables en réserve et les stocks d'une fabrication en cours restent à arbitrer : elles doivent être **visibles avant le combat**.
+- La destination narrative est un **monstre pilleur**, mais il faut décider si les biens sont **définitivement perdus**, récupérables en retrouvant/tuant le monstre, ou partiellement récupérables via une quête de revanche. Une récupération ne doit **pas dupliquer** les objets et ne peut être exploitée pour des gains artificiels. Cela reste une proposition de mécanique, pas une récupération garantie.
+- La perte d'équipement évolue graduellement : **bas palier d'abord**, puis risque croissant à mesure que le personnage devient puissant. Le choix doit rester déterministe ou tiré côté serveur selon une règle connue, non fondé sur des suppositions du navigateur. Une pièce exceptionnelle, bénie, acquise contre des crédits premium ou nécessaire à une quête exige un régime clair avant ouverture publique ; **ne jamais détruire silencieusement ces objets**.
+- Une protection de sac achetable, un coffre sécurisé, un contrat d'assurance ou une récupération via victoire pourraient enrichir la stratégie, **mais aucun n'est validé à ce stade** ; éviter que la perte ne rende l'économie des débutants impossible.
+- La défaite n'efface jamais arbitrairement le **compte**, les droits financiers, les achats premium, les accomplissements permanents ou les éléments historisés. L'archivage d'un personnage Hardcore vaincu doit être auditable et doit éviter la suppression brute de tous ses enregistrements de progression.
 
-**Non négociable sur le plan technique :** aucune suppression irréversible sur simple déclaration du navigateur. Le serveur doit disposer d'un état terminal auditable et d'un processus permettant de corriger **les morts provoquées par panne, bug, désynchronisation ou triche démontrée d'un tiers** ; une indisponibilité de service n'est pas un événement de jeu. Conserver un journal et des sauvegardes administratives sécurisées n'équivaut pas à autoriser des restaurations librement exploitables par le joueur. L'échec normal du combat reste un risque si les règles sont valides.
+### Combat de guilde : exclusion explicite de la mort définitive
+
+**Décision claire :** pendant un **combat de guilde**, **aucune mort n'est définitive**, **même si le personnage a choisi Hardcore**. Une défaite de guilde ne doit donc pas déclencher la consommation automatique d'une protection contre la mort définitive, ni une mort permanente déguisée par une mise à jour différée. Les pertes de sac, l'usure, les frais et les récompenses propres aux batailles de guildes restent **à décider**. Prévoir un type de combat serveur explicite, vérifié au début et à la résolution ; aucune simple étiquette client « guilde » ne doit pouvoir requalifier un combat PvE pour contourner ses risques.
+
+### Accès à Hardcore après apprentissage
+
+- **Ni case à cocher à l'inscription, ni choix de difficulté dès R0.** Le joueur doit comprendre les mécaniques, les risques et les conséquences avant d'y avoir accès.
+- À terme, proposer un **rite, défi narratif ou accomplissement de maîtrise** pour ouvrir volontairement ce parcours. Aucun seuil R ou niveau n'est encore arrêté ; ne pas lier l'accès à la seule durée de jeu.
+- Avant activation : avertissement explicite de la mort définitive en PvE admissible, explication des protections, conditions d'arrêt, des cas exclus (guilde), et **confirmation distincte**. L'absence de réponse ne vaut jamais consentement.
+- Reste à décider : Hardcore réversible ou non ; récompenses propres (sans économie pay-to-win) ; compatibilité avec le marché, les groupes et la Divinité ; restrictions sur l'activation pendant un combat ; éventuelle option pour désactiver la participation à des affrontements létaux.
+- Les règles de pillage et de perte d'équipement **hors Hardcore** continuent d'évoluer avec la puissance du personnage pour conserver une pression réelle sans transformer le mode ordinaire en mort permanente.
+
+**Non négociable sur le plan technique :** aucune disparition irréversible sur simple déclaration du navigateur. Le serveur conserve un état terminal auditable et un mécanisme de correction des décès liés à un **bug, une panne, une désynchronisation ou une triche démontrée d'un tiers** ; une indisponibilité de service n'est jamais un événement de gameplay.
 
 ## 3. Reliques rarissimes de protection de la mort
 
 **Intention exprimée :** protections récupérables par loot sur **boss** et **boss mondiaux**, extrêmement rares, à haute valeur stratégique. Leur distribution doit respecter les règles d'équité solo/multijoueur et les vérifications de contribution déjà prévues pour les boss mondiaux.
 
-**Exemple non canonique :** *Le Dernier Souffle*, une protection consommée au premier événement de mort définitive éligible. Le joueur survivrait à cet événement et la protection serait dépensée atomiquement, sans duplication ni course critique sur plusieurs requêtes. Ce n'est ni une recette arrêtée ni un objet confirmé.
+**Concept désormais apprécié et à conserver sous ce nom (sans préjuger de ses statistiques) :** **Le Dernier Souffle** — *« La mort a bien reçu votre dossier. Elle l'a malheureusement égaré. »* Une relique extrêmement rare obtenue sur un boss ou boss mondial, envisagée pour **empêcher une mort définitive une seule fois**, puis disparaître à l'activation. Les conditions de drop, les éventuelles restrictions et le mécanisme de consommation **ne sont pas encore chiffrés**. La protection contre la mort définitive ne doit pas se consommer lors d'une défaite de guilde où la mort permanente est exclue.
 
 Choix encore ouverts : simple effet préventif consommé automatiquement vs activation préalable ; possibilité d'équiper un objet ou de conserver une charge dédiée ; protection à usage unique ou charges ; transférabilité et liaison ; rang de boss, rareté, plafonds de stock, conservation à travers R ; interaction avec bénédiction ; récompenses des boss et provenance auditable. Ne pas confondre ces objets avec les **armes exceptionnelles non forgeables/non améliorables/non recyclables** déjà définies : il s'agit potentiellement d'une autre catégorie.
 
@@ -56,8 +75,10 @@ Le plafond **R20** et la **Divinité** restent deux objectifs **distincts** dans
 - Tester les cas : plus de flèches, arme à zéro, dette au maximum, coup fatal en un tour au-dessus du seuil d'arrêt, coup fatal avec/sans protection, protections simultanées, double événement, transition du statut mortel au statut soumis à la mort définitive, arrêt manuel, interruption serveur, mode solo et coopératif.
 - **Simulations d'équité indispensables** : comparer coûts, fréquence de décès, durées idle sûres, rendements et accessibilité de la protection entre archer, mêlée et mage ; éviter une classe structurellement condamnée ou invulnérable.
 
-## Statut des décisions
+## Statut des décisions — mis à jour après arbitrage
 
-**Intention forte confirmée par la discussion** : arrêt conditionnel acquis plutôt que gratuit ; fonctionne avec joueur en ligne ou idle ; mort définitive repoussée dans la progression ; protections mythiques très rares issues des boss ; Divinité justifiée par une victoire sur la mortalité.
+**Décisions exprimées clairement :** pas de choix Hardcore à la création ; accès volontaire seulement après maîtrise du jeu, jamais imposé par niveau ou Renaissance ; **aucune mort définitive en bataille de guilde**, même pour Hardcore ; en début de jeu, **pillage du contenu du sac par le monstre, équipement porté protégé** ; progression ultérieure vers perte d'équipement, de faible palier en priorité puis de valeur plus grande ; protection mythique rarissime de boss contre la mort définitive ; **Le Dernier Souffle** et sa phrase sont retenus comme concept narratif à préserver. Arrêt automatique acquis et serveur autoritaire pour mode actif/idle.
 
-**À valider avant de coder** : pouvoir et rangs exacts, conditions d'achat, caractère automatique des protections, seuil de mort définitive, conséquences des premières défaites, statut des acquis à la mort, mécanisme d'immortalité divine et protections contre les incidents techniques.
+**Encore à concevoir et tester :** possibilités de récupération du butin pillé, exceptions de propriété (objets liés/quête/premium), or, nombre d'équipements perdus, seuils de progression, défi d'accès et réversibilité de Hardcore, règles PvP hors guerre de guildes, déclenchement/stockage/transfert des reliques, implications exactes de la Divinité et conséquence des morts en mode ordinaire/Hardcore.
+
+**Priorité technique :** faire précéder toute mécanique de perte permanente par un historique et des tests de conservation des objets/transactions, en excluant toutes les morts provoquées par défaut du serveur.
