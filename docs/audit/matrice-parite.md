@@ -111,3 +111,12 @@
 | **6 — Paiements et lancement** | Crédits / Fast Mode / traitement contestations | Audit sécurité, tests financiers, conformité juridique et capacité |
 
 **Blocage prioritaire :** tant que le client actuel écrit lui-même XP, or et objets, aucune « parité multijoueur sécurisée » ne peut être déclarée. Les routines de l'application de référence sont une **source d'observation**, pas une couche serveur prête à utiliser.
+## Complément d'audit comportemental (11 octobre 2026)
+
+Les modules référencés ici ont désormais leurs premières fiches de règles :
+[compétences et progression](comportement-competences.md),
+[combat et équipement](comportement-combat.md),
+[activités et stockage](comportement-activites.md)
+et [contrats de tests](contrats-tests-parite.md).
+
+**Important :** l'audit révèle des comportements actifs qui contredisent certains commentaires historiques du code étudié : niveau général conservé mais XP neutralisée ; style Défense réellement autorisé sur arme de mêlée ; certains passifs de défense présents dans le calcul mais non affichés dans le catalogue ; copie de l'état de Renaissance plus riche que son résumé introductif. Avant toute implémentation, préférer les branches exécutées et faire vérifier l'équilibrage décidé pour notre jeu. Aucun statut « paritaire » n'est encore revendiqué.
