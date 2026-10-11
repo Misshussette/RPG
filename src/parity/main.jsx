@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { ACTIVITIES, EQUIPMENT_SLOTS, ITEMS, SKILLS } from './catalog.js';
 import { XP_THRESHOLDS, levelForXp } from './engine.js';
+import { WORKSHOPS, workshopById, skillInWorkshop } from './navigation.js';
 import './parity.css';
 
 const fmt = n => new Intl.NumberFormat('fr-FR').format(n);
@@ -46,19 +47,21 @@ function CharacterCreation({busy,onCreate}) {
   const [name,setName]=useState('Voyageur');
   return <div className="eb-auth-frame"><div className="eb-auth-head"><img src="/logo-eclipse.svg" alt=""/><h1>Qui êtes-vous ?</h1><p>Vous maîtriserez toutes les disciplines. Votre première arme ne définit pas votre destin.</p></div><Pane title="NOUVEAU PERSONNAGE" meta="17 COMPÉTENCES DISPONIBLES"><form className="eb-form" onSubmit={e=>{e.preventDefault();onCreate(name)}}><label>Nom du personnage<input minLength={2} maxLength={24} required value={name} onChange={e=>setName(e.target.value)}/></label><button className="eb-button primary" disabled={busy}>{busy?'Création…':'Commencer l’aventure'}</button></form></Pane></div>;
 }
-function Skills({character,selected,onSelect}) {
-  return <Pane title="COMPÉTENCES" meta={`${fmt(character.totalLevel)} NIVEAUX CUMULÉS · 17 COMPÉTENCES`} className="eb-skills">
-    {groups.map(([group,title])=><div key={group} className="eb-skill-group"><div className="eb-caption">{title}</div><div className="eb-skills-grid">{SKILLS.filter(s=>s.group===group).map(s=>{const xp=character.skills[s.id],level=levelForXp(xp);return <button key={s.id} title={`${s.name} · ${fmt(xp)} XP`} onClick={()=>onSelect(s.id)} className={`eb-skill ${selected===s.id?'selected':''}`}><span className="eb-skill-icon">{s.icon}</span><span className="eb-skill-body"><b>{s.name}</b><Progress level={level} xp={xp}/></span><strong>{level}</strong></button>})}</div></div>)}
+function Skills({character,selected,onSelect,workshopId='overview'}) {
+  const visible = SKILLS.filter(s=>skillInWorkshop(workshopId,s.id));
+  return <Pane title={workshopId==='overview'?'COMPÉTENCES':'COMPÉTENCES DE CET ATELIER'} meta={`${fmt(character.totalLevel)} NIVEAUX CUMULÉS · ${SKILLS.length} COMPÉTENCES AU TOTAL`} className="eb-skills">
+    {groups.map(([group,title])=>{const entries=visible.filter(s=>s.group===group);return entries.length>0 && <div key={group} className="eb-skill-group"><div className="eb-caption">{title}</div><div className="eb-skills-grid">{entries.map(s=>{const xp=character.skills[s.id],level=levelForXp(xp);return <button key={s.id} title={`${s.name} · ${fmt(xp)} XP`} onClick={()=>onSelect(s.id)} className={`eb-skill ${selected===s.id?'selected':''}`}><span className="eb-skill-icon">{s.icon}</span><span className="eb-skill-body"><b>{s.name}</b><Progress level={level} xp={xp}/></span><strong>{level}</strong></button>})}</div></div>})}
   </Pane>;
 }
-function Activities({character,onAction,busy,selected,onSelect}) {
-  const available=Object.entries(ACTIVITIES);
+function Activities({character,onAction,busy,selected,onSelect,workshopId='overview'}) {
+  const available=Object.entries(ACTIVITIES).filter(([,activity])=>skillInWorkshop(workshopId,activity.skill));
   const current=character.activity && ACTIVITIES[character.activity.id];
   const chosen=available.find(([,v])=>v.skill===selected);
   return <Pane title="ACTIVITÉS" meta="TEMPS CALCULÉ SUR LE SERVEUR" className="eb-activities">
     {current && <div className="eb-current-job"><div><b>EN COURS : {current.name}</b><small>Le travail continue pendant votre absence, jusqu’au plafond initial de deux heures.</small></div><div className="eb-job-buttons"><button className="eb-button" disabled={busy} onClick={()=>onAction('settle')}>Actualiser</button><button className="eb-button warning" disabled={busy} onClick={()=>onAction('stop')}>Arrêter</button></div></div>}
     {available.map(([id,a])=>{const active=character.activity?.id===id;const level=levelForXp(character.skills[a.skill]);const skill=SKILLS.find(s=>s.id===a.skill);return <div key={id} className={`eb-job ${active?'active':''} ${chosen?.[0]===id?'focused':''}`}><span className="eb-job-icon">{skill.icon}</span><div><b>{a.name}</b><small>{skill.name} · niv. {a.level} · {a.durationMs/1000} s/cycle · {a.xp} XP/cycle</small></div><button className="eb-button" disabled={busy||Boolean(character.activity)||level<a.level} onClick={()=>{onSelect(a.skill);onAction('start',id)}}>{active?'Active':'Démarrer'}</button></div>})}
-    <p className="eb-note">Trois récoltes réellement fonctionnelles dans ce premier chantier. Les autres métiers sont recensés, mais leurs actions ne sont pas encore implémentées. Les cadences sont provisoires.</p>
+    {available.length===0 && <p className="eb-note">Aucune action serveur jouable dans cet atelier pour le moment. L’organisation est testable ; les recettes et mécanismes restent à reconstruire.</p>}
+    {available.length>0 && <p className="eb-note">Seules les récoltes affichées ci-dessus fonctionnent réellement sur le serveur. Les recettes, achats et autres métiers restent à implémenter. Les cadences sont provisoires.</p>}
   </Pane>;
 }
 function Inventory({character}) {
@@ -76,10 +79,41 @@ function Equipment({character}) {
 function Journal({character}) {
   return <Pane title="JOURNAL" meta="ANCIEN → RÉCENT" className="eb-journal"><div className="eb-journal-scroll" role="log">{character.log.map((entry,index)=><div key={`${entry.at}-${index}`}><span>{new Date(entry.at).toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})}</span><p>{entry.message}</p></div>)}</div></Pane>;
 }
+function WorkshopIntro({workshop}) {
+  if (workshop.id==='overview') return <Pane title="ORGANISATION DES MÉTIERS" meta="PREMIÈRE REFONTE DE NAVIGATION">
+    <p className="eb-note">Choisissez un lieu dans le menu pour retrouver les compétences et activités associées. Les 17 compétences restent distinctes, avec leurs niveaux et leur XP inchangés. Plusieurs lieux peuvent faire appel à la même compétence.</p>
+    <div className="eb-workshop-cards">{WORKSHOPS.filter(w=>w.id!=='overview').map(w=><div key={w.id} className="eb-workshop-card"><strong>{w.icon} {w.label}</strong><small>{w.subtitle}</small></div>)}</div>
+  </Pane>;
+  return <Pane title={workshop.label.toUpperCase()} meta="ORGANISATION DES ATELIERS">
+    <p className="eb-workshop-description">{workshop.subtitle}. Les compétences de ce lieu restent indépendantes. Une même recette ou ressource n’est jamais dupliquée entre les ateliers.</p>
+    <div className="eb-workshop-capabilities">{workshop.preview.map(name=><div key={name} className="eb-capability"><span>{name}</span><small>À reconstruire</small></div>)}</div>
+  </Pane>;
+}
 function World({character,revision,onAction,onLogout,busy}) {
   const [selected,setSelected]=useState('mining');
-  return <div className="eb-shell"><aside className="eb-left"><div className="eb-brand"><img src="/logo-eclipse.svg" alt="L’Éclipse Blanche"/><div><small>LA RÉALITÉ SE FISSURE</small><b>L’ÉCLIPSE BLANCHE</b></div></div><nav><div className="eb-caption">VOTRE MONDE</div><a href="#competences">Compétences <small>17</small></a><a href="#activites">Activités</a><a href="#equipement">Équipement</a><a href="#inventaire">Inventaire</a><div className="eb-caption more">EN CONSTRUCTION</div><span>Combats et donjons</span><span>Fabrication et forge</span><span>Quêtes et contrats</span><span>Banque et marché</span></nav><div className="eb-left-bottom"><small>RECONSTRUCTION · ALPHA 0.3.0</small><p>Serveur autoritaire · progression en ligne</p><button onClick={onLogout} disabled={busy}>Se déconnecter</button><a href="/">Ancienne alpha locale ↗</a></div></aside>
-  <div className="eb-main"><header className="eb-top"><div><small>RECONSTRUCTION / COMPÉTENCES</small><h1>{character.name} <em>R{character.rebirth}</em></h1></div><div className="eb-summary"><span title="Niveaux gagnés au-dessus des 17 niveaux de départ (chaque compétence commence au niveau 1)."><small>NIVEAUX GAGNÉS</small><b>+{character.levelsGained ?? character.totalLevel - SKILLS.length}</b></span><span title="Moyenne des cinq compétences de combat, arrondie à l’entier inférieur."><small>NIVEAU COMBAT</small><b>{character.combatLevel}</b></span><span title="Nombre de compétences ayant dépassé le niveau 1."><small>COMPÉTENCES PROGRESSÉES</small><b>{character.skillsAdvanced ?? SKILLS.filter(s=>levelForXp(character.skills[s.id])>1).length}<em>/{SKILLS.length}</em></b></span></div></header><div className="eb-center"><div id="competences"><Skills character={character} selected={selected} onSelect={setSelected}/></div><div id="activites"><Activities character={character} selected={selected} onSelect={setSelected} busy={busy} onAction={onAction}/></div></div></div>
+  const [workshopId,setWorkshopId]=useState('overview');
+  const workshop=workshopById(workshopId);
+  const chooseWorkshop=id=>{setWorkshopId(id);const entry=workshopById(id);if(entry.skills.length && !entry.skills.includes(selected))setSelected(entry.skills[0]);};
+  return <div className="eb-shell"><aside className="eb-left">
+    <div className="eb-brand"><img src="/logo-eclipse.svg" alt="L’Éclipse Blanche"/><div><small>LA RÉALITÉ SE FISSURE</small><b>L’ÉCLIPSE BLANCHE</b></div></div>
+    <nav aria-label="Ateliers et activités"><div className="eb-caption">VOTRE MONDE</div>
+      {WORKSHOPS.map(w=><button type="button" key={w.id} className={`eb-nav-item ${workshop.id===w.id?'selected':''}`} onClick={()=>chooseWorkshop(w.id)} aria-current={workshop.id===w.id?'page':undefined}><span className="eb-nav-icon">{w.icon}</span>{w.label}</button>)}
+      <div className="eb-caption more">PERSONNAGE</div>
+      <a href="#competences">Compétences <small>{SKILLS.length}</small></a>
+      <a href="#inventaire">Inventaire</a><a href="#equipement">Équipement</a>
+      <div className="eb-caption more">À RECONSTRUIRE</div>
+      <span>Banque, marché et enchères</span><span>Quêtes, succès et Codex</span><span>Renaissances et guildes</span>
+    </nav>
+    <div className="eb-left-bottom"><small>RECONSTRUCTION · ALPHA 0.3.3</small><p>Ateliers réorganisés · règles serveur inchangées</p><button onClick={onLogout} disabled={busy}>Se déconnecter</button></div>
+  </aside>
+  <div className="eb-main"><header className="eb-top"><div><small>ATELIERS / {workshop.label.toUpperCase()}</small><h1>{character.name} <em>R{character.rebirth}</em></h1></div>
+    <div className="eb-summary"><span title="Niveaux gagnés au-dessus des 17 niveaux de départ."><small>NIVEAUX GAGNÉS</small><b>+{character.levelsGained ?? character.totalLevel - SKILLS.length}</b></span><span title="Moyenne des cinq compétences de combat, arrondie à l’entier inférieur."><small>NIVEAU COMBAT</small><b>{character.combatLevel}</b></span><span title="Nombre de compétences ayant dépassé le niveau 1."><small>COMPÉTENCES PROGRESSÉES</small><b>{character.skillsAdvanced ?? SKILLS.filter(s=>levelForXp(character.skills[s.id])>1).length}<em>/{SKILLS.length}</em></b></span></div>
+  </header>
+  <div className="eb-center">
+    <WorkshopIntro workshop={workshop}/>
+    <div id="competences"><Skills character={character} selected={selected} onSelect={setSelected} workshopId={workshop.id}/></div>
+    <div id="activites"><Activities character={character} selected={selected} onSelect={setSelected} workshopId={workshop.id} busy={busy} onAction={onAction}/></div>
+  </div></div>
   <aside className="eb-right"><div id="inventaire"><Inventory character={character}/></div><div id="equipement"><Equipment character={character}/></div><Journal character={character}/></aside>
  </div>;
 }
