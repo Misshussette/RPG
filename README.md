@@ -59,3 +59,13 @@ Les mécanismes et chiffres de cette alpha servent à éprouver la boucle du jeu
 - [Renaissances](docs/renaissance.md)
 - [Univers et histoire](docs/histoire.md)
 - [Décisions et points à arbitrer](docs/decisions.md)
+
+## Build et tests vérifiés (11 octobre 2026)
+
+- `npm test` : 10 tests réussis (moteur et scénario interface).
+- `npm run build:standalone` : produit `dist-standalone/index.html` sans installation de dépendances supplémentaire, avec Node.js.
+- Test navigateur de la version autonome : affichage PC/mobile, création de personnage et déclenchement de combat effectués, sans exception JavaScript détectée. L'environnement isolé du test ne permet pas de valider la sauvegarde locale persistante.
+- Le build Vite classique n'a pas pu être testé dans l'environnement de vérification faute d'accès au registre npm. Le build autonome, lui, a réussi.
+- **Sécurité** : les boutons d'import/export sont supprimés, mais les données en `localStorage` restent modifiables. Aucun multijoueur ni achat ne peut être branché sur cet état client. Backend autoritaire obligatoire avant la phase en ligne.
+
+Pour tester immédiatement : télécharger l'archive `L_Eclipse_Blanche_Build_Web_Alpha_0.1.1.zip` fournie dans la conversation, extraire `index.html` et l'ouvrir dans un navigateur. Pour héberger : placer `index.html` à la racine d'un site statique.
