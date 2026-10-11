@@ -27,3 +27,10 @@ Liste exacte des compétences, système d'expérience, rythme R0, prix des amél
 ## Ateliers regroupés et fabrication à partir de l'objet final — piste de conception (11 octobre 2026)
 
 Les compétences restent indépendantes ; plusieurs peuvent être présentées dans un même atelier fonctionnel (mine/fonderie, armurerie, culture/alchimie, etc.). Le joueur pourrait choisir un **produit final** et faire planifier ses sous-recettes, l'acquisition des matériaux, la transformation et la fabrication finale, avec prérequis, coûts, durée et alternatives d'approvisionnement explicites. L'exécution serait **autorisée et persistée côté serveur** ; aucune fabrication ne doit ignorer le niveau minimum ou le bon outil. Référence détaillée : [conception des ateliers et de la fabrication en chaîne](conception-ateliers-production-marche.md). Ce sont des hypothèses à tester après la reconstruction fonctionnelle, **pas des recettes ou valeurs validées**.
+
+## Précision : bûcheronnage et déduction automatique des stocks (11 octobre 2026)
+
+- **Bûcheronnage** reste une compétence complète et indépendante ; atelier d'accès « Forêt & Bois » envisagé. Ses ressources alimentent l'Armurerie (arcs/flèches) et les autres fabrications qui nécessitent du bois.
+- Une commande de craft depuis l'objet final doit d'abord vérifier les **lingots/composants déjà disponibles**, puis le **minerai/bois réellement manquant**, et enfin les coûts d'or et outils requis. **Rien à miner si le minerai existant suffit, rien à fondre si les lingots existants suffisent.**
+- Tout stock et coût doit être recalculé et consommé une seule fois côté serveur ; prérequis par étape, sans duplication ni modification des règles d'XP des compétences.
+- Exemple fictif et méthode dans [la conception des ateliers et fabrications](conception-ateliers-production-marche.md). Les quantités et coûts illustratifs ne sont pas des recettes validées.
