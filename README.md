@@ -119,3 +119,9 @@ Ces documents sont des constats techniques d'analyse statique et une spécificat
 - `server/sql/002_parity_engine.sql` à exécuter **après** `001_initial.sql`. Deux terminaux nécessaires pour API et Vite. Aucune migration automatique de l'ancien personnage n'est effectuée.
 
 **Limites :** les autres 14 compétences sont présentes dans le modèle mais sans leurs moteurs spécifiques. Le combat et l'économie multijoueur ne sont pas implémentés dans cette nouvelle tranche. Le backend n'est pas prêt pour le public ; tests PostgreSQL réels et audit de sécurité à faire. Le prototype précédent reste accessible sur `/` et n'est pas une preuve de parité.
+
+## Correctif 0.3.1 — statistiques lisibles (11 octobre 2026)
+
+L'indicateur **niveau total** de la référence est la **somme des niveaux des 17 compétences** (un personnage débutant a donc 17 et non 1). Pour éviter de le confondre avec un niveau global de personnage, l'en-tête de l'interface React présente désormais : **niveaux gagnés** (= somme des niveaux − 17), **niveau de combat** (= moyenne entière des cinq compétences de combat) et **compétences progressées** (= compétences au-dessus du niveau 1). La somme historique reste indiquée dans le panneau des compétences avec l'intitulé explicite « niveaux cumulés ». La révision serveur reste disponible dans les échanges API mais n'est plus affichée comme statistique de gameplay.
+
+**Aucune modification de formule, de base PostgreSQL ou de progression enregistrée.** Un exemple reproductible : 16 compétences niveau 1 et extraction niveau 2 donnent 18 niveaux cumulés, +1 niveau gagné, combat niveau 1 et 1/17 compétence progressée.
