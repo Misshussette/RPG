@@ -1,4 +1,4 @@
-# L’ÉCLIPSE BLANCHE — Première alpha solo
+> **Changement de stratégie (11/10/2026)** : l'alpha 0.2.3 est une **maquette provisoire**, pas la base fonctionnelle à enrichir petit à petit. Priorité à l'[audit et à la parité fonctionnelle](docs/strategie-parite.md) avec les systèmes étudiés, en React et avec backend autoritaire. Les trois disciplines de la maquette ne limitent pas les compétences du jeu final. Les actifs et le code tiers ne seront repris littéralement que si les droits l'autorisent.\n\n# L’ÉCLIPSE BLANCHE — Première alpha solo
 
 Un RPG narratif et décalé dans un monde où les représentations collectives peuvent modifier la réalité.
 
