@@ -92,3 +92,9 @@ La Renaissance ne doit **plus** être conditionnée à la montée de **toutes le
 - Chaque voie doit permettre d'atteindre la Renaissance via un mélange de **choix et de défis équivalents en effort**, et non via un jeu artificiellement simplifié ou gratuit. Les contraintes de styles alimentent les métiers **par incitation**, pas par obligation d'un niveau 100 partout.
 - Des défis peuvent être spécifiques à une voie ou choisissables parmi plusieurs, avec garde-fous contre les raccourcis de marché/paiement. L'accès solo doit rester réalisable et le marché ne doit pas être obligatoire.
 - **À arbitrer** : règles exactes du niveau global, minima éventuels de familles, choix des épreuves, prérequis par Renaissance et tests d'équité des parcours.
+
+## Mort et Divinité — direction narrative du 11 octobre 2026
+
+Proposition en cours d'équilibrage : l'échec d'un combat est **récupérable** dans les premiers cycles. À un stade avancé de Renaissances **encore indéterminé**, la mort définitive pourrait menacer le personnage, sans surprise pour le joueur et sans supprimer ses droits de compte ni traiter un bug comme une défaite. Des protections **rarissimes obtenues sur boss ou boss mondiaux** permettraient de survivre à une mort autrement définitive. Les mécanismes et leur rareté restent à définir.
+
+**Motivation de la Divinité** : accéder au statut divin (toujours distinct du seul R20) pourrait abolir le risque de disparition définitive, **sans rendre invincible** ni supprimer les coûts de combat. Aucun palier ou effet de divinité chiffré n'est encore approuvé. Voir [Survie, mort et Divinité](mort-survie-et-divinite.md).
