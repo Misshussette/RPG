@@ -90,7 +90,7 @@ L'usage des ressources disponibles n'autorise pas à ignorer les **prérequis de
 | **Mêlée / Défense** | Arme sans munition par coup | Risque de proximité et consommation de soin comme contrainte principale ; éventuellement **usure réparable** à une fréquence faible, seulement si cela apporte du jeu et non de la corvée. |
 | **Magie** | Bâton, sorts conditionnés par niveau ; aucun coût de mana par attaque prouvé dans le flux audité | **Ressource d'énergie qui se régénère** ou charges spécifiques pour sorts très puissants, buffs, effets de zone ; éviter d'obliger à récolter un composant commun à chaque attaque. |
 
-**Décision de méthode, sans chiffres imposés** : ne pas affaiblir automatiquement Mêlée et Magie pour « punir » les autres styles ; chercher d'abord à réduire les tâches répétitives de l'archer et lui donner des avantages tangibles en combat (portée, efficacité sur certaines cibles, types de projectiles, cadence, effet tactique). Les styles ont des **contraintes et des avantages distincts**, pas nécessairement des dépenses de consommables rigoureusement identiques. L'effort de préparation des flèches doit être intégré au calcul de performance.
+**Arbitrage du 11 octobre 2026 :** le créateur souhaite **conserver la véritable chaîne de production et la consommation des flèches** comme identité contraignante mais appréciée de l'archer. Les facilités automatiques envisagées plus haut (lots beaucoup plus généreux, flèches ordinaires gratuites, récupération partielle) **ne sont pas validées** et ne doivent pas être appliquées d'office. Rééquilibrer prioritairement les **contraintes de préparation et d'utilisation de Mêlée et Magie**, plutôt que gommer la complexité du style Distance. L'équité s'évalue en efficacité/coût/temps de préparation, pas en copiant la même ressource sur trois classes.
 
 ### Tests d'équilibre à mener avant validation
 
@@ -103,6 +103,30 @@ Mesurer en solo et en coopération, sur des rencontres comparables et avec équi
 - Une option « fabriquer automatiquement les flèches manquantes » doit rester soumise au **plan de production et aux prérequis serveur** décrits plus haut, avec accord sur les achats ; aucun approvisionnement virtuel offert en plein combat.
 
 **À arbitrer avec le créateur :** existence et forme d'une ressource magique, usure des armes, taux de récupération des flèches, fabrication de hampes, quantité de projectiles par recette, avantages tactiques propres aux styles et seuils de rééquilibrage. **Aucune de ces valeurs n'est validée par cette note.**
+
+## 2 ter. Équilibrage des styles — validation usure de Mêlée, exploration du coût magique
+
+### Décisions de principe approuvées le 11 octobre 2026
+
+1. **Distance :** conserver le besoin d'un arc, d'un stock de flèches, de l'extraction/bûcheronnage/fonderie/fabrication selon les recettes, et la consommation des munitions. Ne pas imposer une simplification automatique de cette logistique ni changer les valeurs avant des tests.
+2. **Mêlée :** ajouter une **durabilité / usure réelle** des armes au combat, une possibilité de **réparation**, et surtout des voies pour **améliorer la résistance** de façon sensible via Métallurgie/Armurerie/maîtrise/améliorations. Les coûts exacts, la fréquence, l'effet d'une arme à 0 et le traitement des armures restent à définir. Ne pas détruire silencieusement un équipement rare ou béni. Ne pas permettre d'améliorer les armes exceptionnelles de boss qui sont, par décision antérieure, **non améliorables** ; elles exigent une règle spéciale de durabilité, à arbitrer.
+3. **Magie :** choisir un **coût d'usage exigeant et original**, inspiré de contes ou de folklore (pactes, tabous, noms vrais, dette, rituels), **plutôt qu'une simple jauge de mana copiée**. **Aucun mécanisme précis n'est encore validé**, aucun ajout au moteur sans nouvel accord.
+4. **Ne pas supprimer les choix de combat existants** pendant l'étude : le catalogue audité contient 16 sélections de sorts (4 familles et 4 paliers) modulant une attaque de bâton, mais cette diversité **n'établit pas 16 actions de sorts indépendantes**. Vérifier en jeu ce que le créateur désigne comme « un sort non identifié mais utilisable », et préserver la parité avant d'étendre le système.
+
+### Proposition à débattre : la Dette Occulte, coût cumulatif narratif
+
+- Chaque attaque magique alimente une **Dette Occulte / instabilité rituelle** selon le sort, le bâton, les maîtrises et les événements. Les attaques de base restent utilisables ; les rituels puissants alourdissent davantage la dette.
+- À des seuils visibles, la dette entraîne des **contraintes progressives** (perte de maîtrise, risque d'incident, efficacité moindre ou impossibilité provisoire d'utiliser les sorts avancés), jamais un coup de dés punitif et inexplicable qui supprime tout l'équipement.
+- La dette peut être **apurée volontairement** par repos limité, rituel, contrepartie ou composant ; la préparation des rites implique métiers et ressources (culture pour composants, artisanat de catalyseurs, découverte de véritables noms, pactes), sans obligation d'ajouter de multiples monnaies ou barres.
+- La maîtrise et l'équipement peuvent **augmenter la tolérance, réduire le coût, sécuriser des rites ou rendre l'apurement plus efficace**. Un mage expérimenté gagne en autonomie comme le guerrier renforce la solidité de sa lame.
+- Variante mythologique : à certains niveaux, **vrais noms, pactes et tabous** peuvent autoriser des effets spéciaux conditionnels, avec promesse tenue ou rupture volontaire. Ne pas constituer un système aléatoire permanent de sanctions incompréhensibles.
+- La mécanique doit être **suivie côté serveur**, avec un état stable au redémarrage, une progression en l'absence, et des explications lisibles sur les conséquences. Vérifier les combats enchaînés, la possibilité de rester utile sans préparation, et le fait que le mage ne soit pas à la fois moins puissant et plus onéreux.
+
+### Comparaison de la charge réelle (à simuler)
+
+**Archer :** consommation de flèches + temps de production + usage de l'arc. **Guerrier :** usure des armes, matériaux et temps de réparation, investissements de renforcement. **Mage :** dette ou autre prix rituels, temps et composants de purification, maîtrises du grimoire. Comparer efficacité et autonomie en début R0, milieu R et fin de cycle ; ni pénalité identique ni « trois corvées interchangeables ».
+
+Les idées de **Dette Occulte**, tabous, vrais noms et système de sort restent des propositions, pas des règles entérinées. Toute extension de la magie doit rester compatible avec le socle auditée, et avec les éléments mythologiques **originaux** de L’Éclipse Blanche.
 
 ## 3. Marché et enchères : choix à arbitrer
 
