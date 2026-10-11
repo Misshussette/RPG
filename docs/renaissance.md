@@ -52,3 +52,32 @@ Conditions exactes de R0 → R1 jusqu'à R19 → R20 ; niveaux et compétences r
 - Conserver le principe multi-critères pour chaque palier, avec des combinaisons renouvelées : progression, combats, histoire, épreuves spécifiques et, progressivement, mastery plus poussée. L'enjeu monte sans exiger systématiquement **100 % de chaque compétence ou du contenu**.
 - Les accomplissements explicitement permanents restent acquis. Si une condition concerne **le cycle actuel**, elle doit l'indiquer et être distinguée des faits déjà validés historiquement.
 - **À valider ultérieurement :** formule du niveau, pondérations, bornes, seuils par R, contenu des épreuves, simulation de durée R0→R1, réinitialisations exactes et bonus de Renaissance.
+
+
+## Vision de découverte progressive — intention à préciser (11 octobre 2026)
+
+**But recherché :** le cycle **R0 doit donner l'impression d'avoir vu pratiquement toutes les grandes mécaniques de l'application**, sans en avoir épuisé la portée. La première Renaissance doit donc couronner une vraie pratique transversale ; elle n'exige pas l'accès à toutes les recettes, toutes les améliorations, tous les boss ou tous les niveaux de maîtrise. La découverte d'un système et sa maîtrise complète sont deux choses distinctes.
+
+### États fonctionnels à prévoir pour chaque système
+- **Présenté / découvert** : le joueur voit à quoi sert la forge, le marché, la banque, un donjon, une activité ou un familier, et comment ces systèmes se relient.
+- **Accessible** : le joueur peut accomplir les actions de base d'un système ; pas de menu factice pour simuler la parité.
+- **Perfectionné** : des capacités supplémentaires deviennent disponibles à travers le niveau, la Renaissance, les quêtes, les exploits et/ou des ressources spéciales.
+- **Maîtrisé** : capacités avancées, avec de nouveaux objectifs et contraintes ; une progression facultative ou très exigeante ne doit pas bloquer artificiellement toute l'histoire.
+
+**Exemple illustratif, NON VALIDÉ :** la **Forge des Nains** pourrait être visible et partiellement fonctionnelle dès R0, recevoir de premières techniques en R1, puis des transformations complexes vers R5. R1 ou R5 ne sont pas des seuils arrêtés. Éviter de masquer intégralement une mécanique très importante jusqu'à une Renaissance tardive si R0 doit permettre d'en comprendre l'intérêt.
+
+### Déblocages combinés — piste de conception, pas d'économie actée
+- **Renaissance** : accès à de nouveaux degrés d'un système déjà connu.
+- **Maîtrise réelle / accomplissements** : capacité démontrée par une pratique ou un exploit, éventuellement spécifique au cycle en cours ; les succès historiques acquis restent permanents selon les règles déjà établies.
+- **Objets, composants rares, sceaux ou jetons obtenus en jeu** : débloquent une recette, financent une opération ou activent une capacité. Leur origine, conservation à la Renaissance, transférabilité, consommation, nombre et rareté restent à déterminer.
+- Éviter de multiplier sans raison les monnaies distinctes. Une ressource de déblocage doit avoir un rôle concret et identifiable, distinct des crédits premium vendus en euros.
+- Les capacités de progression nécessaires pour atteindre R20 doivent rester **accessibles sans paiement réel**. Les achats premium ne doivent pas valider les épreuves, exploits ou conditions R.
+
+### Conséquences pour la reconstruction
+1. Reproduire la **richesse fonctionnelle** des systèmes de référence avant de les reconditionner en paliers de Renaissance ; ne pas réduire tout le jeu à quelques activités ou une poignée de boutons.
+2. Distinguer explicitement les états **découvert / accessible / capacité débloquée / maîtrisé**, avec raison de blocage et voie d'obtention visibles pour le joueur.
+3. Préserver une source de données unique pour les ressources, jetons, outils, équipements, recettes et capacités ; autorisations et consommations évaluées **en transaction sur le serveur**.
+4. Prévoir que deux personnages au même R puissent avoir des possibilités différentes, en raison de leurs choix, découvertes et accomplissements.
+5. **À arbitrer avant implémentation :** chronologie précise R0–R20, exigences de R0→R1, contenu de la Forge des Nains, jetons éventuels, conditions de drop, caractère consommable et réinitialisations de capacités.
+
+Cette section formalise une **orientation de conception discutée**, non des seuils chiffrés ou des mécanismes définitivement approuvés.
