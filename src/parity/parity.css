@@ -5,3 +5,20 @@
 /* v0.3.1 : un niveau total de 18 est la somme des 17 compétences, pas le niveau du héros. */
 .eb-summary b em{font:normal 12px system-ui,sans-serif;color:#a5b1c2;margin-left:2px}
 .eb-summary span[title]{cursor:help}
+
+/* Ateliers : navigation regroupée, sans changements de règles de personnage. */
+.eb-left nav .eb-nav-item{display:flex;align-items:center;gap:9px;width:100%;text-align:left;padding:9px 10px;border:1px solid transparent;border-radius:5px;background:transparent;color:#c7d2e1;font-size:11px;line-height:1.35}
+.eb-left nav .eb-nav-item:hover{background:#22314a;border-color:#354764}
+.eb-left nav .eb-nav-item.selected{background:#28364e;color:#f3d9a8;border-color:#a18051;font-weight:750}
+.eb-nav-icon{color:#d6af70;font-size:17px;flex:none;width:21px;text-align:center}
+.eb-workshop-description{font-size:12px;color:#b9c6d9;line-height:1.6;margin:0 0 11px}
+.eb-workshop-capabilities{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.eb-capability{border:1px solid #324358;border-radius:6px;padding:9px 10px;display:flex;justify-content:space-between;align-items:center;gap:6px;background:#1b293b}
+.eb-capability span{font-size:11px;color:#e1d8c9}
+.eb-capability small{font-size:9px;text-align:right;color:#aab2bb;white-space:nowrap}
+.eb-workshop-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:13px}
+.eb-workshop-card{border:1px solid #36445b;border-radius:6px;padding:10px;background:#1c293b;display:flex;flex-direction:column;gap:6px}
+.eb-workshop-card strong{font-size:12px;color:#e5c994}
+.eb-workshop-card small{font-size:10px;color:#aab6c6}
+@media(max-width:900px){.eb-left nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:3px}.eb-left nav .eb-caption,.eb-left nav .eb-caption.more{grid-column:1/-1;margin:12px 0 3px}.eb-left nav .eb-nav-item{padding:10px 7px}}
+@media(max-width:480px){.eb-workshop-cards,.eb-workshop-capabilities{grid-template-columns:1fr}.eb-left nav .eb-nav-item{font-size:10px}}
