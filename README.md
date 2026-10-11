@@ -141,3 +141,14 @@ Voir [l'organisation des métiers, les commandes de fabrication en chaîne, le m
 L'écran `/parity.html` organise désormais les 17 compétences par **lieux fonctionnels** : Combat & Donjons ; Ressources & Fonderie (avec **bûcheronnage**) ; Armurerie ; Pêche & Cuisine ; Culture & Alchimie ; Feux & Rituels ; Chasse & Contrats ; Larcins. La **Métallurgie** apparaît dans Ressources et Armurerie mais conserve **un seul identifiant et un seul XP**. Les compétences restent jouables ou non selon la progression réelle du moteur, pas selon un bouton fictif. Les trois récoltes serveur fonctionnelles sont filtrées selon le lieu sélectionné. Inventaire, sauvegardes et API restent inchangés ; **aucune migration SQL**. La référence privée locale `4174` demeure intacte.
 
 Tests ajoutés pour la couverture des 17 compétences, les regroupements sans doublons et l'accessibilité des activités existantes. Guide : [organisation de l'interface V1](docs/organisation-interface-v1.md). **L'interface n'est pas encore une parité complète ; cette version sert à tester l'organisation avant de poursuivre la reconstruction des moteurs.** La limite de refus d'une revanche a également été fixée à **3**, dans la documentation seulement, sans moteur de revanche implémenté.
+
+## Correction 0.3.4 — vraie organisation des écrans de référence
+
+La navigation React 0.3.3 ne regroupait que les compétences et affichait des fonctions encore absentes. **Elle ne permettait pas de vérifier l'organisation réelle des écrans de l'application source.** La version 0.3.4 inventorie désormais les sous-fonctions sourcées dans `/parity.html` et ajoute un **mode d'essai local sur la référence privée complète** :
+
+- Référence originale inchangée : `http://127.0.0.1:4174/`
+- Même référence, **vrais boutons redistribués en ateliers** : `http://127.0.0.1:4174/?layout=ateliers`
+
+Le mode ateliers réutilise les boutons et écrans réels ; le fichier `private-reference/index.html` reste intact, le même navigateur conserve la même sauvegarde pour ces deux URLs, et le dossier privé n'est pas publié sur GitHub. Les raccourcis « Fondre les lingots » et « Fabriquer les pièces métalliques » donnent deux accès aux **sous-onglets du même écran métallurgie**, sans duplication de l'état. Aucune nouvelle migration SQL.
+
+Voir la [table de correspondance exacte des menus](docs/organisation-interface-v1.md). L'interface React et ses trois activités serveur restent un chantier indépendant : **elles ne constituent pas encore la reconstruction fonctionnelle de tous les écrans source**.
