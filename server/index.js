@@ -3,6 +3,7 @@ import { randomUUID } from 'node:crypto';
 import { Pool } from 'pg';
 import { passwordHash,verifyPassword,newToken,hashToken,parseCookies,validIdentity } from './security.js';
 import { applyAction } from './actions.js';
+import { createParityCharacter, getParityCharacter, applyParityAction } from './parity.js';
 
 const port=Number(process.env.PORT||3001);
 const origin=process.env.APP_ORIGIN;
@@ -89,6 +90,21 @@ async function route(req,res){
    const token=parseCookies(req.headers.cookie).eb_session;
    await pool.query('DELETE FROM sessions WHERE token_hash=$1',[hashToken(token)]);
    return json(res,200,{ok:true},{'set-cookie':clearCookie});
+  }
+  // Nouveau personnage et activités autoritaires. Aucune progression n'est lue depuis localStorage.
+  if(req.method==='GET' && url.pathname==='/api/v2/me'){
+   const result=await getParityCharacter(pool,accountId);
+   return json(res,result.status,result.body);
+  }
+  if(req.method==='POST' && url.pathname==='/api/v2/character'){
+   const input=await body(req);
+   const result=await withTransaction(db=>createParityCharacter(db,accountId,input,Date.now()));
+   return json(res,result.status,result.body);
+  }
+  if(req.method==='POST' && url.pathname==='/api/v2/action'){
+   const input=await body(req);
+   const result=await withTransaction(db=>applyParityAction(db,accountId,input,Date.now()));
+   return json(res,result.status,result.body);
   }
   if(req.method==='GET' && url.pathname==='/api/me'){
    const result=await pool.query('SELECT state,revision FROM characters WHERE account_id=$1',[accountId]);
