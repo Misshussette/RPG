@@ -21,7 +21,7 @@ function load() {
     const text = localStorage.getItem(SAVE_KEY);
     return text ? validateSave(JSON.parse(text)) : null;
   } catch (error) {
-    console.warn('Sauvegarde illisible, restauration par import possible.', error);
+    console.warn('Sauvegarde locale illisible.', error);
     return null;
   }
 }
@@ -29,7 +29,7 @@ function load() {
 function persist() {
   if (!game) return;
   try { localStorage.setItem(SAVE_KEY, JSON.stringify(game)); }
-  catch { notify('Impossible de sauvegarder sur cet appareil : exportez votre partie.'); }
+  catch { notify('Impossible de sauvegarder sur cet appareil.'); }
 }
 
 function notify(message) {
@@ -56,13 +56,13 @@ function fill(value, max, variant = '') {
 function eclipse() { return '<span class="eclipse-mark" aria-hidden="true"></span>'; }
 
 function welcome() {
-  root.innerHTML = `<div class="welcome-shell"><div class="welcome-art"><div class="sky-glow"></div><div class="moon-art"></div><div class="horizon"></div><div class="welcome-caption"><span class="kicker">ACTE I · LES IMAGES MENTENT</span><h2>Une ville ordinaire.<br>Une réalité qui se fissure.</h2><p>Une affiche a changé. Personne ne semble l’avoir remarqué. Et les pantoufles commencent à mordre.</p></div></div><div class="welcome-form"><div class="brand brand-large">${eclipse()}<div><span class="brand-small">L’AVENTURE D’ABORD</span><strong>L’ÉCLIPSE <i>BLANCHE</i></strong></div></div><div class="step">PROLOGUE <span>·</span> CRÉATION DU PERSONNAGE</div><h1>Comment vous appelle-t-on&nbsp;?</h1><p class="muted">Le monde a peut-être oublié votre nom. Nous, non.</p><form id="start-form"><label class="field-label" for="hero-name">Nom du personnage</label><input id="hero-name" name="name" maxlength="24" autocomplete="nickname" placeholder="Votre nom ou pseudonyme" required value="Voyageur"><div class="field-label field-space">Votre discipline de prédilection</div><div class="styles">${Object.entries(DISCIPLINES).map(([id, d], index) => `<label class="style-choice"><input type="radio" name="discipline" value="${id}" ${index === 0 ? 'checked' : ''}><span class="style-symbol">${d.icon}</span><strong>${d.label}</strong><small>${d.description}</small></label>`).join('')}</div><button class="button-primary start-button" type="submit">Entrer dans la ville <span>↗</span></button></form><p class="fine-print">Prototype solo gratuit · sauvegarde sur cet appareil · aucun achat disponible</p><button class="text-link" data-action="import">Importer une ancienne sauvegarde</button></div></div>`;
+  root.innerHTML = `<div class="welcome-shell"><div class="welcome-art"><div class="sky-glow"></div><div class="moon-art"></div><div class="horizon"></div><div class="welcome-caption"><span class="kicker">ACTE I · LES IMAGES MENTENT</span><h2>Une ville ordinaire.<br>Une réalité qui se fissure.</h2><p>Une affiche a changé. Personne ne semble l’avoir remarqué. Et les pantoufles commencent à mordre.</p></div></div><div class="welcome-form"><div class="brand brand-large">${eclipse()}<div><span class="brand-small">L’AVENTURE D’ABORD</span><strong>L’ÉCLIPSE <i>BLANCHE</i></strong></div></div><div class="step">PROLOGUE <span>·</span> CRÉATION DU PERSONNAGE</div><h1>Comment vous appelle-t-on&nbsp;?</h1><p class="muted">Le monde a peut-être oublié votre nom. Nous, non.</p><form id="start-form"><label class="field-label" for="hero-name">Nom du personnage</label><input id="hero-name" name="name" maxlength="24" autocomplete="nickname" placeholder="Votre nom ou pseudonyme" required value="Voyageur"><div class="field-label field-space">Votre discipline de prédilection</div><div class="styles">${Object.entries(DISCIPLINES).map(([id, d], index) => `<label class="style-choice"><input type="radio" name="discipline" value="${id}" ${index === 0 ? 'checked' : ''}><span class="style-symbol">${d.icon}</span><strong>${d.label}</strong><small>${d.description}</small></label>`).join('')}</div><button class="button-primary start-button" type="submit">Entrer dans la ville <span>↗</span></button></form><p class="fine-print">Prototype solo gratuit · sauvegarde sur cet appareil · aucun achat disponible</p><p class="fine-print">Progression locale expérimentale, non transférable en multijoueur.</p></div></div>`;
 }
 
 const menus = [ ['camp', '◈', 'Vue d’ensemble'], ['combat', '⚔', 'Combats'], ['quests', '✧', 'Quêtes'], ['inventory', '▣', 'Inventaire'], ['codex', '▤', 'Codex'] ];
 
 function sidebar() {
-  return `<aside class="sidebar"><div class="brand">${eclipse()}<div><span class="brand-small">UN MONDE QUI DOUTE</span><strong>L’ÉCLIPSE <i>BLANCHE</i></strong></div></div><div class="sidebar-label">EXPLORER</div><nav class="navigation" aria-label="Navigation principale">${menus.map(([id, icon, title]) => `<button type="button" data-view="${id}" class="nav-item ${view === id ? 'selected' : ''}" ${view === id ? 'aria-current="page"' : ''}><span class="nav-icon">${icon}</span><span>${title}</span>${id === 'quests' && questStatus(game).some(q => q.progress >= q.goal && !q.claimed) ? '<span class="nav-bubble">!</span>' : ''}</button>`).join('')}</nav><div class="sidebar-bottom"><div class="online-indicator"><span></span> MODE SOLO · LOCAL</div><p>La ville change, même quand vous ne la regardez pas.</p><button class="muted-button" data-action="export">↥ Exporter la sauvegarde</button></div></aside>`;
+  return `<aside class="sidebar"><div class="brand">${eclipse()}<div><span class="brand-small">UN MONDE QUI DOUTE</span><strong>L’ÉCLIPSE <i>BLANCHE</i></strong></div></div><div class="sidebar-label">EXPLORER</div><nav class="navigation" aria-label="Navigation principale">${menus.map(([id, icon, title]) => `<button type="button" data-view="${id}" class="nav-item ${view === id ? 'selected' : ''}" ${view === id ? 'aria-current="page"' : ''}><span class="nav-icon">${icon}</span><span>${title}</span>${id === 'quests' && questStatus(game).some(q => q.progress >= q.goal && !q.claimed) ? '<span class="nav-bubble">!</span>' : ''}</button>`).join('')}</nav><div class="sidebar-bottom"><div class="online-indicator"><span></span> MODE SOLO · LOCAL</div><p>La ville change, même quand vous ne la regardez pas.</p></div></aside>`;
 }
 
 function header() {
@@ -112,40 +112,13 @@ function codex() {
 }
 
 function activityPanel() {
-  return `<aside class="activity-sidebar"><div class="activity-title">JOURNAL <span>◷</span></div><div class="activity-entries">${game.log.slice(0, 9).map((entry, index) => `<div class="activity-entry"><span class="activity-bullet ${index === 0 ? 'latest' : ''}"></span><p>${safe(entry.message)}</p></div>`).join('')}</div><div class="activity-foot"><div class="panel-eyebrow">VERSION DE DÉVELOPPEMENT</div><strong>Alpha · Solo</strong><p>Les fonctionnalités en ligne, la boutique et les paiements ne sont pas actifs.</p><button class="muted-button" data-action="export">Exporter ma partie ↗</button><button class="muted-button" data-action="import">Importer une partie ↙</button><button class="muted-button danger" data-action="reset">Recommencer</button></div></aside>`;
+  return `<aside class="activity-sidebar"><div class="activity-title">JOURNAL <span>◷</span></div><div class="activity-entries">${game.log.slice(0, 9).map((entry, index) => `<div class="activity-entry"><span class="activity-bullet ${index === 0 ? 'latest' : ''}"></span><p>${safe(entry.message)}</p></div>`).join('')}</div><div class="activity-foot"><div class="panel-eyebrow">VERSION DE DÉVELOPPEMENT</div><strong>Alpha · Solo</strong><p>Les fonctionnalités en ligne, la boutique et les paiements ne sont pas actifs.</p><button class="muted-button danger" data-action="reset">Recommencer</button></div></aside>`;
 }
 
 function render() {
   if (!game) { welcome(); return; }
   const pages = { camp, combat, quests, inventory, codex };
   root.innerHTML = `<div class="app-layout">${sidebar()}<div class="workspace">${header()}<main class="content" id="main-content">${pages[view]()}</main></div>${activityPanel()}</div><button class="mobile-menu" data-action="menu" aria-label="Afficher la navigation">☰</button>`;
-}
-
-function exportSave() {
-  if (!game) { notify('Aucune partie à exporter.'); return; }
-  const blob = new Blob([JSON.stringify(game, null, 2)], { type: 'application/json' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = `eclipse-blanche-${new Date().toISOString().slice(0, 10)}.json`;
-  a.click();
-  setTimeout(() => URL.revokeObjectURL(url), 1000);
-  notify('Sauvegarde exportée. Conservez ce fichier.');
-}
-
-function importSave() {
-  const input = document.createElement('input');
-  input.type = 'file'; input.accept = '.json,application/json';
-  input.addEventListener('change', async () => {
-    if (!input.files?.[0]) return;
-    try {
-      if (input.files[0].size > 1_000_000) throw new Error('Fichier trop volumineux.');
-      const next = validateSave(JSON.parse(await input.files[0].text()));
-      if (game && !confirm('Importer remplacera la partie actuelle. Continuer ?')) return;
-      game = next; autoLoop = false; view = 'camp'; persist(); render(); notify('Partie importée avec succès.');
-    } catch (error) { notify(`Import impossible : ${error.message}`); }
-  });
-  input.click();
 }
 
 root.addEventListener('submit', (event) => {
@@ -166,11 +139,9 @@ root.addEventListener('click', (event) => {
   if (target.dataset.view) { view = target.dataset.view; document.querySelector('.sidebar')?.classList.remove('mobile-open'); render(); return; }
   if (target.dataset.monster) { selectedMonster = target.dataset.monster; lastEvent = ''; render(); return; }
   const action = target.dataset.action;
-  if (action === 'import') { importSave(); return; }
-  if (action === 'export') { exportSave(); return; }
   if (action === 'menu') { document.querySelector('.sidebar')?.classList.toggle('mobile-open'); return; }
   if (action === 'reset') {
-    if (confirm('Effacer votre personnage et recommencer ? Exportez votre partie au préalable si vous voulez la conserver.')) {
+    if (confirm('Effacer définitivement votre personnage local et recommencer ? Cette alpha ne propose pas de restauration.')) {
       localStorage.removeItem(SAVE_KEY); game = null; autoLoop = false; view = 'camp'; render();
     }
     return;
