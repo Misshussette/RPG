@@ -43,3 +43,12 @@ La parité exacte n'a pas été démontrée : l'audit du contenu complet de l'AS
 ## Audit disponible
 
 La première cartographie structurelle est enregistrée dans [l'inventaire fonctionnel](audit/inventaire-fonctionnel.md) et sa [matrice de parité](audit/matrice-parite.md). Elle atteste la présence des systèmes dans les sources examinées, **pas** leur compatibilité directe avec un backend sécurisé ou une parité validée par test.
+
+## Phase suivante — audit comportemental publié
+
+- [Progression et compétences](audit/comportement-competences.md)
+- [Combat et équipement](audit/comportement-combat.md)
+- [Activités / stockage / absence](audit/comportement-activites.md)
+- [Scénarios de tests de parité](audit/contrats-tests-parite.md)
+
+L'examen repose sur l'implémentation analysée, en signalant les anciens commentaires devenus faux. Il reste un **audit statique**, avant les tests exécutables de notre moteur React/serveur.
