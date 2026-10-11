@@ -73,3 +73,12 @@ Ce registre distingue les **règles retenues dans nos échanges** des **orientat
 - Lorsque les deux conditions sont réunies, un **tirage de rareté** décide si un exceptionnel existe ; la condition ne garantit jamais le drop. Si un exceptionnel tombe, son attribution entre candidats éligibles reste à définir (pondération ou tirage).
 - Seuils et probabilités numériques non validés : ils seront calibrés sur la durée de l'événement, le niveau R et la population, sans modifier rétroactivement les règles d'un événement en cours.
 - Décision restant à prendre : faut-il un tirage unique par manifestation à la fin de l'événement, et comment comptabiliser soins et soutien sans les confondre avec les dégâts collectifs ?
+
+### Atteignabilité en solo du seuil collectif — précision validée
+
+- Le seuil collectif d'une manifestation au palier **R20** doit pouvoir être atteint **par un R20 seul**, sans imposer la présence de plusieurs joueurs.
+- Objectif d'équilibrage : un R20 autour de **50 % d'optimisation** peut théoriquement franchir ce seuil dans des conditions particulièrement exigeantes ; un R20 presque maximisé y parvient plus régulièrement.
+- Le pourcentage d'optimisation devra être défini (compétences, équipement, caractéristiques, etc.) et confirmé par simulations. **Il ne s'agit pas d'un multiplicateur automatique de seuil**.
+- La coopération facilite le franchissement du seuil collectif ; elle ne doit pas être strictement obligatoire.
+- Le double seuil collectif/individuel ne garantit jamais un objet exceptionnel : le tirage rare reste nécessaire.
+- Ce repère R20 sert de contrainte de conception ; les autres R doivent recevoir leur propre équilibrage.
