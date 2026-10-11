@@ -44,7 +44,7 @@
       const target=document.getElementById(spec.target);
       if (!target) return;
       target.click();
-      const tab=document.querySelector('#smith-tabs .craft-tab[onclick*="\''+spec.tab+'\'"]');
+      const tab=[...document.querySelectorAll('#smith-tabs .craft-tab')].find(b=>b.getAttribute('onclick')?.includes("'"+spec.tab+"'"));
       if (tab) tab.click();
     });
     return btn;
