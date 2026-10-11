@@ -51,3 +51,13 @@ Les appels POST depuis le navigateur doivent contenir un en-tête `Origin` égal
 - Multijoueur et boss mondiaux : **non implémentés**.
 
 Ne jamais committer un fichier `.env` contenant des secrets.
+
+## API de reconstruction React — version 0.3.0
+
+Après `001_initial.sql`, exécuter **manuellement** `server/sql/002_parity_engine.sql` sur la base locale dédiée. Aucun schéma existant n'est effacé. Les nouvelles tables `parity_characters` et `parity_events` sont distinctes des anciens tests ; leur contenu constitue la seule source de vérité pour la nouvelle interface React, accessible à `/parity.html`.
+
+Routes authentifiées ajoutées : `GET /api/v2/me`, `POST /api/v2/character` avec `{\"name\":\"Personnage\"}`, `POST /api/v2/action` avec `{\"action\":\"start\",\"activityId\":\"mine_terne\"}`, `{\"action\":\"settle\"}` ou `{\"action\":\"stop\"}`. Les mêmes routes `/api/register`, `/api/login`, `/api/logout` assurent l'authentification. Les requêtes POST exigent l'en-tête Origin conforme à `APP_ORIGIN` et la session cookie valide.
+
+Les XP, le temps, les quantités et le solde communiqués par un client ne sont jamais acceptés comme résultats d'action. Les personnages sont verrouillés par `SELECT … FOR UPDATE` pendant la transaction de règlement et chaque évolution incrémente une révision journalisée. Les tests unitaires couvrent les invariants principaux, **mais aucune intégration avec un PostgreSQL réel n'a été exécutée ici**.
+
+Le comportement de l'ancienne API expérimentale (`/api/action`) n'est pas celui du nouveau moteur ; elle ne doit pas être utilisée pour la nouvelle version. Aucun des deux systèmes ne doit être exposé publiquement à ce stade.
