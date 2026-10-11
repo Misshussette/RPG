@@ -1,0 +1,13 @@
+import { readFileSync, mkdirSync, writeFileSync } from 'node:fs';
+const file = (p) => readFileSync(new URL('../' + p, import.meta.url), 'utf8');
+const stripExports = (s) => s.replace(/\bexport\s+(?=(?:const|function|class)\b)/g, '');
+const stripImports = (s) => s.replace(/^import\s+\{[^\n]+\}\s+from\s+[^\n]+;\s*/gm, '');
+const css = file('src/style.css');
+const script = [stripExports(file('src/game/data.js')), stripExports(stripImports(file('src/game/engine.js'))), stripImports(file('src/main.js'))].join('\n');
+if (/<\/script/i.test(script) || /<\/style/i.test(css)) throw new Error('Unexpected closing HTML tag inside bundle');
+if (/^\s*(?:import|export)\b/m.test(script)) throw new Error('Unresolved module statement');
+const html = `<!doctype html>\n<html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#0c101b"><title>L’Éclipse Blanche — Alpha Solo</title><style>${css}</style></head><body><div id="app"></div><script>${script}</script></body></html>`;
+const dir = new URL('../dist-standalone/', import.meta.url);
+mkdirSync(dir, { recursive: true });
+writeFileSync(new URL('index.html', dir), html);
+console.log(`Build autonome créé : dist-standalone/index.html (${Buffer.byteLength(html)} octets)`);
