@@ -69,3 +69,11 @@ Les mécanismes et chiffres de cette alpha servent à éprouver la boucle du jeu
 - **Sécurité** : les boutons d'import/export sont supprimés, mais les données en `localStorage` restent modifiables. Aucun multijoueur ni achat ne peut être branché sur cet état client. Backend autoritaire obligatoire avant la phase en ligne.
 
 Pour tester immédiatement : télécharger l'archive `L_Eclipse_Blanche_Build_Web_Alpha_0.1.1.zip` fournie dans la conversation, extraire `index.html` et l'ouvrir dans un navigateur. Pour héberger : placer `index.html` à la racine d'un site statique.
+
+## Serveur en chantier — version 0.2.0
+
+Un premier backend Node.js/PostgreSQL est présent dans [server/](server/README.md) : comptes, sessions, premières commandes de jeu calculées côté serveur, verrouillage des actions dans des transactions, journal d'événements et alertes de cadence.
+
+**Attention : le client web actuel reste la maquette solo à stockage local et n'est pas encore connecté à cette API.** Le backend n'est pas prêt pour une ouverture publique ni pour les paiements. Les tests d'intégration PostgreSQL et le build complet n'ont pas été exécutés dans l'environnement de cet échange. Pour lancer l'API localement, lire [server/README.md](server/README.md).
+
+La version 0.2.0 décrit le début de la transition vers une application exclusivement en ligne ; elle ne signifie pas que cette transition est terminée.
