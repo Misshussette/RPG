@@ -11,8 +11,9 @@ Regroupements d'interface envisagés :
 
 | Atelier/lieu visible — noms provisoires | Fonctions réunies | Compétences qui restent distinctes |
 |---|---|---|
-| Mine & Fonderie | Extraction, combustible, raffinage des minerais, fabrication des lingots | Extraction, Métallurgie ; éventuellement Allumage si recette applicable |
-| Armurerie | Armes, armures, arcs, flèches, assemblages ; forge conventionnelle | Métallurgie pour les objets métalliques, Artisanat, Arcs et flèches |
+| Mine & Fonderie | Extraction, raffinage des minerais, fabrication des lingots ; combustible uniquement si la recette en exige | Extraction, Métallurgie ; éventuellement Allumage si la recette y fait réellement appel |
+| Forêt & Bois | Coupe des arbres, production de bûches et autres ressources forestières ; accès à leur utilisation dans les recettes | **Bûcheronnage**, compétence indépendante, à ne pas oublier ni fondre dans l'Artisanat |
+| Armurerie | Armes, armures, arcs, flèches, assemblages ; forge conventionnelle ; consommation de bois et lingots déjà produits | Métallurgie pour les objets métalliques, Artisanat, Arcs et flèches ; le Bûcheronnage reste acquis à l'étape de collecte |
 | Culture & Alchimie | Culture, récolte, préparation de potions et mixtures | Culture et autres compétences pertinentes selon les recettes ; alchimie à concevoir, pas à créer artificiellement comme une 18e compétence |
 | Cuisine & Pêche | Pêche, transformation des prises, plats et consommables | Pêche et Cuisine |
 | Rituels & Feux | Feux, os, protections et préparations | Allumage, Crémation, Magie selon action |
@@ -25,6 +26,30 @@ Les opérations sont classées **une fois** dans un catalogue de recettes/action
 ## 2. Fabrication depuis l'objectif final (« fabriquer ceci »)
 
 L'utilisateur sélectionne le **résultat désiré** (p. ex. une armure en diamant, exemple fictif), choisit une quantité, et le serveur construit un **graphe de dépendances de recettes** : matières premières → lingots/composants → équipement fini. La commande permet de résoudre automatiquement les opérations intermédiaires autorisées, au lieu d'obliger le joueur à changer de menu.
+
+### Priorité absolue : stocks existants et chemin minimal
+
+**La fabrication commence par les ressources déjà possédées, jamais par une récolte systématique.** Le moteur doit raisonner **depuis le résultat final vers les ingrédients**, puis organiser uniquement les étapes manquantes dans l'ordre possible :
+
+1. Déterminer la quantité exacte du produit final et consulter ses recettes canoniques (versions et prérequis compris).
+2. Déduire **d'abord les objets finis et composants intermédiaires disponibles** du besoin de chaque étape. Si un joueur possède les lingots suffisants, ne pas refondre du minerai ; s'il a déjà le minerai nécessaire à la production des lingots manquants, ne pas miner davantage.
+3. Déduire le minerai, le bois et les autres matières premières encore disponibles seulement pour les étapes réellement nécessaires ; ne pas consommer deux fois un même stock si plusieurs sous-recettes utilisent cet ingrédient.
+4. Pour le **déficit résiduel seulement**, proposer les actions de production/récolte autorisées ou des achats explicites. Ne pas déclencher d'achat ni de prélèvement d'or non confirmé.
+5. Vérifier pour **chaque étape à exécuter** les niveaux de compétence, outils, ressources auxiliaires et coûts en or ; calculer le temps restant, les XP attribuées par métier et la destination du produit final.
+6. Le plan obtenu est **recalculé sous transaction** au démarrage à partir des stocks disponibles à cet instant, avec réservation/débit atomique. Une simulation d'interface ne verrouille pas les ressources. Si un stock ou un prix a changé, demander une nouvelle confirmation avant toute opération non autorisée.
+
+**Exemple purement fictif de recette**, à ne pas imposer comme équilibrage : une armure requiert **5 lingots et 100 or** ; un lingot exige **2 minerais**. Le joueur possède **2 lingots, 8 minerais et 150 or**.
+
+| Ressource / action | Nécessaire pour l'armure | Déjà disponible | Action réelle |
+|---|---:|---:|---|
+| Lingots | 5 | 2 | Fabriquer **3 lingots**, pas 5 |
+| Minerais pour les 3 lingots | 6 | 8 | **0 minerai à extraire**, utiliser 6 minerais |
+| Or pour l'armure | 100 | 150 | Débiter **100 or** à la fabrication |
+| Armure | 1 | 0 | Fabriquer **1 armure** après production des 3 lingots |
+
+Solde théorique des matières, **si aucun autre coût n'existe** : 2 minerais restants, 0 lingot restant, 50 or restants, 1 armure obtenue. Si le joueur possède déjà **5 lingots et les 100 or**, il passe **directement à la création de l'armure**, sans minage ni fonderie. Si le joueur a 2 lingots et **4 minerais**, alors seuls **2 minerais** manquent : l'extraction devient la première étape. Ce calcul doit aussi tenir compte du bois ou du combustible **uniquement si la recette en exige**, et des quantités autorisées en banque lorsque cette fonctionnalité sera validée.
+
+L'usage des ressources disponibles n'autorise pas à ignorer les **prérequis de la fabrication finale**, même si les étapes intermédiaires sont devenues inutiles. Une compétence de bûcheronnage basse n'a pas à bloquer une armure qui n'utilise pas de bois. À l'inverse, une recette d'arc utilisant du bois doit pouvoir lancer la coupe **seulement pour les bûches manquantes**, puis passer à la fabrication des arcs/flèches en conservant leurs XP distinctes.
 
 ### Avant confirmation
 
