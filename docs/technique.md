@@ -44,3 +44,17 @@ Pour lancer : `npm install`, puis `npm run dev`. Pour tester : `npm test`.
 **Cette alpha n'inclut pas de backend, de comptes, de multijoueur, de paiements, de boutique ou de Fast Mode.** Le protocole serveur et la base PostgreSQL restent une phase distincte. La distribution est web/PC sans Steam.
 
 Consulter [l'état de l'alpha](implementation-alpha.md) pour le détail.
+
+## Architecture cible validée : serveur unique online (11 octobre 2026)
+
+**Remplace la proposition précédente de mode solo PC avec SQLite / offline.** Tous les joueurs utilisent une infrastructure serveur commune ; solo et multi sont des modes d'activité, pas deux sauvegardes ni deux économies. Comptes et personnages persistés sur PostgreSQL du VPS ; le navigateur n'est qu'une interface. Le client ne doit recevoir aucun accès direct privilégié à PostgreSQL.
+
+Flux : client web/PC → HTTPS API authentifiée → moteur serveur autoritaire → PostgreSQL. Pour les boss partagés, événements temps réel : WebSocket ou SSE selon besoins, sans faire confiance au client pour dégâts, tirages, temps, récompenses ou scores.
+
+Sécurité : cookie HttpOnly/Secure/SameSite, protections CSRF appropriées, autorisations sur chaque action, rate limiting, anti-rejeu/idempotence, transactions atomiques et verrous sur opérations critiques, source de temps et aléatoire côté serveur ; sauvegardes PostgreSQL chiffrées hors VPS avec restauration testée. Comptes de services dédiés et moindre privilège, secrets hors Git, observabilité sans journaliser de données sensibles.
+
+Paiements : Stripe Checkout/abonnements avec prix et commandes créés au backend. Traiter les webhooks avec vérification de signature et contrôle d'unicité des événements ; enregistrer commande et crédits/abonnement dans des transactions atomiques, avec livre de comptes et rapprochement Stripe ; refuser l'octroi de crédit sur un simple succès affiché dans le navigateur. Traiter remboursements, impayés et rétrofacturations sans perdre la traçabilité.
+
+Déploiement initial : un VPS suffisant si dimensionné correctement, reverse proxy TLS, conteneurs ou services gérés, PostgreSQL privé, supervision, sauvegardes externes. Conception stateless côté API et migrations reproductibles pour permettre plus tard une réplication/horizontalisation, mais pas de Kubernetes avant justification par charge et contraintes d'exploitation.
+
+**État** : architecture décidée, non encore développée ni auditée en sécurité. La version 0.1.1 utilise encore `localStorage` ; elle sert uniquement de prototype temporaire et ne doit pas être présentée comme sécurisée.
