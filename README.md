@@ -89,3 +89,10 @@ La version 0.2.0 décrit le début de la transition vers une application exclusi
 - Tests de structure ajoutés dans `tests/layout.test.js` ; vérification Chromium locale effectuée sur l'interface desktop/mobile et tests Node de l'alpha effectués.
 
 **Important :** le backend PostgreSQL 0.2.x n'est pas encore relié au client. Les parties de l'alpha restent dans `localStorage`, donc modifiables ; ne pas déployer en jeu public ni activer des achats avant le remplacement par une API serveur autoritaire. Les mécanismes originaux de gameplay restent en construction.
+
+## Audit de l'application de référence — inventaire V1 (11 octobre 2026)
+
+- [Inventaire fonctionnel détaillé](docs/audit/inventaire-fonctionnel.md) : compétences, combat, donjons, boss, équipement, métiers, quêtes, économie, progression, modes et sécurité.
+- [Matrice de parité](docs/audit/matrice-parite.md) : état exact de l'alpha vs fonctionnalités visées, critères d'acceptation et ordre de reconstruction React/serveur.
+
+**Précision :** inventaire statique du code fourni, non une validation de parité jouable. L'archive réduite ne contient pas les images externes. La phase suivante consiste à auditer les formules et comportements de chaque système et à construire les tests de reconstruction. Aucun code ni contenu tiers brut n'a été importé dans ce dépôt.
