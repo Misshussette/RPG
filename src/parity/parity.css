@@ -22,3 +22,13 @@
 .eb-workshop-card small{font-size:10px;color:#aab6c6}
 @media(max-width:900px){.eb-left nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:3px}.eb-left nav .eb-caption,.eb-left nav .eb-caption.more{grid-column:1/-1;margin:12px 0 3px}.eb-left nav .eb-nav-item{padding:10px 7px}}
 @media(max-width:480px){.eb-workshop-cards,.eb-workshop-capabilities{grid-template-columns:1fr}.eb-left nav .eb-nav-item{font-size:10px}}
+
+/* Source réelle : sous-rubriques consultables, sans bouton d'action fictif. */
+.eb-workshop-capabilities .eb-capability{cursor:pointer;text-align:left;color:inherit}
+.eb-workshop-capabilities .eb-capability:hover{border-color:#71819b;background:#24354b}
+.eb-workshop-capabilities .eb-capability.selected{border-color:#cba66f;background:#2a394c}
+.eb-workshop-detail{border:1px solid #42506a;border-left:3px solid #d2a76a;border-radius:6px;background:#111c2c;padding:12px 14px;margin-top:10px}
+.eb-workshop-detail strong{color:#eacda0;font-size:12px}
+.eb-workshop-detail p{margin:6px 0;color:#dae1ed;line-height:1.55;font-size:12px}
+.eb-workshop-detail small{font-size:10px;color:#9fafc3}
+@media(max-width:1200px){.eb-workshop-capabilities{grid-template-columns:1fr}}
