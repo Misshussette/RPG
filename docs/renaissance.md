@@ -81,3 +81,14 @@ Conditions exactes de R0 → R1 jusqu'à R19 → R20 ; niveaux et compétences r
 5. **À arbitrer avant implémentation :** chronologie précise R0–R20, exigences de R0→R1, contenu de la Forge des Nains, jetons éventuels, conditions de drop, caractère consommable et réinitialisations de capacités.
 
 Cette section formalise une **orientation de conception discutée**, non des seuils chiffrés ou des mécanismes définitivement approuvés.
+
+## Métiers utiles mais non obligatoires pour la Renaissance — décision de principe du 11 octobre 2026
+
+La Renaissance ne doit **plus** être conditionnée à la montée de **toutes les 17 compétences à 100**. Chaque métier doit rester riche et utile, mais **aucune chaîne de production précise n'est nécessairement imposée à tous les personnages**. L'effort de jeu reste indispensable : progression générale, jalons narratifs, défis réellement accomplis et un niveau suffisant d'engagement dans plusieurs mécaniques, sans la liste rigide « forge 100, arcs 100, etc. ».
+
+- Le style **Distance** peut pousser naturellement à apprendre Bûcheronnage / Extraction / Métallurgie / Arcs et flèches, parce que ses flèches sont consommées ; **ce n'est pas un prérequis universel de R**.
+- Le style **Mêlée** peut pousser vers l'entretien, la réparation et l'amélioration de résistance des armes ; le joueur peut aussi envisager l'achat ou le butin si les règles le permettent.
+- Le style **Magie** peut pousser à découvrir des rituels, cultiver des composants ou fabriquer des catalyseurs pour gérer le coût occulte ; ces métiers ne deviennent pas pour autant obligatoires pour tout personnage.
+- Chaque voie doit permettre d'atteindre la Renaissance via un mélange de **choix et de défis équivalents en effort**, et non via un jeu artificiellement simplifié ou gratuit. Les contraintes de styles alimentent les métiers **par incitation**, pas par obligation d'un niveau 100 partout.
+- Des défis peuvent être spécifiques à une voie ou choisissables parmi plusieurs, avec garde-fous contre les raccourcis de marché/paiement. L'accès solo doit rester réalisable et le marché ne doit pas être obligatoire.
+- **À arbitrer** : règles exactes du niveau global, minima éventuels de familles, choix des épreuves, prérequis par Renaissance et tests d'équité des parcours.
