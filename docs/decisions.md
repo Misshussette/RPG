@@ -122,3 +122,10 @@ Ce registre distingue les **règles retenues dans nos échanges** des **orientat
 - **Divinité** : orientation narrative nouvelle : après R20 et les autres accomplissements requis, devenir un Dieu de l'Éclipse Blanche pourrait signifier **ne plus pouvoir disparaître définitivement**, sans obtenir l'invincibilité en combat. Portée exacte à valider ; R20 et Divinité restent distincts.
 - Équité : pas de coût vital réservé aux euros ; serveur autoritaire pour mort, protections et auto-arrêt ; une panne/bug/triche tierce ne doit jamais être assimilé à une mort normale.
 - **À arbitrer** : palier fatal, conséquences d'une défaite, sauvegardes/recours, PvP, coûts/paliers Instinct, rareté/échange des reliques, privilèges divins. Voir [document détaillé](mort-survie-et-divinite.md).
+
+## Revanche sur le monstre pilleur — intention retenue le 11 octobre 2026
+
+- Après une défaite et un pillage, conserver le **butin perdu** dans un état serveur identifiable et récupérable ; **en combattant à nouveau le même type de monstre**, le joueur peut voir réapparaître **son pilleur particulier**, un peu plus puissant que les autres.
+- L'apparition doit être annoncée **explicitement dans un canal de chat/journal dédié**, sous forme d'une proposition **« Le défier ? Oui / Non »**, avec le risque signalé. **Jamais de revanche déclenchée automatiquement**, y compris en combat idle : si le joueur est absent, garder une proposition à consulter à son retour, selon une durée restant à définir.
+- En cas de victoire, rendre les biens récupérables **une seule fois**, en transaction, même si le sac est plein ou si plusieurs sessions demandent la récompense. Les chances de réapparition, délais, bonus de difficulté, conséquences d'un nouvel échec et statut des biens non récupérés restent à équilibrer.
+- Voir [conception détaillée de la revanche et de la mort](mort-survie-et-divinite.md).
