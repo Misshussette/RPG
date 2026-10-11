@@ -4,7 +4,7 @@
  * This is NOT the React/authoritative multiplayer game.
  */
 import http from 'node:http';
-import { createReadStream, existsSync, statSync } from 'node:fs';
+import { createReadStream, existsSync, statSync, readFileSync } from 'node:fs';
 import { resolve, relative, extname, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -33,13 +33,20 @@ const server = http.createServer((req, res) => {
   if (req.method !== 'GET' && req.method !== 'HEAD') {
     res.writeHead(405, { Allow: 'GET, HEAD' }); res.end(); return;
   }
-  let pathname;
-  try { pathname = decodeURIComponent(new URL(req.url, `http://${address}:${port}`).pathname); }
+  let pathname, layout;
+  try {
+    const requested=new URL(req.url, `http://${address}:${port}`);
+    pathname=decodeURIComponent(requested.pathname);
+    layout=requested.searchParams.get('layout')==='ateliers';
+  }
   catch { res.writeHead(400); res.end(); return; }
   if (pathname.includes('\0') || pathname.includes('\\')) { res.writeHead(400); res.end(); return; }
-  let target = resolve(sourceRoot, '.' + (pathname === '/' ? '/index.html' : pathname));
+  const overlayRequest = pathname === '/__reference-ateliers.js';
+  let target = overlayRequest
+    ? resolve(projectRoot, 'scripts/reference-ateliers.js')
+    : resolve(sourceRoot, '.' + (pathname === '/' ? '/index.html' : pathname));
   const rel = relative(sourceRoot, target);
-  if (rel === '..' || rel.startsWith('..' + sep) || rel.startsWith('/')) { res.writeHead(403); res.end(); return; }
+  if (!overlayRequest && (rel === '..' || rel.startsWith('..' + sep) || rel.startsWith('/'))) { res.writeHead(403); res.end(); return; }
   if (!existsSync(target) || !statSync(target).isFile()) {
     res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });
     res.end(`Fichier de référence introuvable : ${pathname}\nLes images peuvent être absentes de l'archive HTML.\n`); return;
@@ -53,6 +60,17 @@ const server = http.createServer((req, res) => {
     // Reference HTML contains inline JS/CSS. Permit it locally, but forbid remote APIs.
     'Content-Security-Policy': "default-src 'self' data: blob:; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self'; media-src 'self' data: blob:; object-src 'none'; base-uri 'self'; form-action 'self'",
   };
+  // Optional UI-only layout on the SAME origin (same private local save).
+  // Reference file is never modified. Only the response to ?layout=ateliers is decorated.
+  if (layout && (pathname === '/' || pathname === '/index.html')) {
+    const original=readFileSync(target,'utf8');
+    const injection='<script defer src="/__reference-ateliers.js"></script>';
+    const rendered=original.replace(/<\/body>/i, injection+'</body>');
+    res.writeHead(200, headers);
+    if (req.method === 'HEAD') { res.end(); return; }
+    res.end(rendered);
+    return;
+  }
   res.writeHead(200, headers);
   if (req.method === 'HEAD') { res.end(); return; }
   createReadStream(target).on('error', () => res.destroy()).pipe(res);
@@ -60,5 +78,6 @@ const server = http.createServer((req, res) => {
 server.requestTimeout = 10_000;
 server.listen(port, address, () => {
   console.log(`Référence PRIVÉE en lecture/jeu local : http://${address}:${port}/`);
+  console.log('Organisation optionnelle des menus : http://127.0.0.1:'+port+'/?layout=ateliers');
   console.log('Aucune connexion à PostgreSQL, aucun multijoueur. Ne pas exposer ce port sur le réseau.');
 });
