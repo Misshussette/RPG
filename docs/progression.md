@@ -34,3 +34,17 @@ Les compétences restent indépendantes ; plusieurs peuvent être présentées d
 - Une commande de craft depuis l'objet final doit d'abord vérifier les **lingots/composants déjà disponibles**, puis le **minerai/bois réellement manquant**, et enfin les coûts d'or et outils requis. **Rien à miner si le minerai existant suffit, rien à fondre si les lingots existants suffisent.**
 - Tout stock et coût doit être recalculé et consommé une seule fois côté serveur ; prérequis par étape, sans duplication ni modification des règles d'XP des compétences.
 - Exemple fictif et méthode dans [la conception des ateliers et fabrications](conception-ateliers-production-marche.md). Les quantités et coûts illustratifs ne sont pas des recettes validées.
+
+## Contraintes de styles, progression indirecte et combat en absence — décision de principe (11 octobre 2026)
+
+Le créateur souhaite **conserver la complexité de l'archer** (stocks de flèches à préparer et à dépenser), ajouter une **usure de mêlée réparable avec résistance améliorable**, et développer pour le mage un **prix occulte à gérer** dont le concept de « Dette Occulte » est approuvé dans son principe, avec mécanismes exacts encore à définir.
+
+**Observation structurante** : ce qui semblait pénible dans la référence sert aussi d'incitation à pratiquer les métiers associés. Conserver cette **synergie** sans que le joueur soit contraint de monter *toutes* les compétences pour progresser en Renaissance. L'artisanat autonome et le marché doivent être des stratégies complémentaires, pas un passage forcé ni une façon d'acheter directement un fait d'armes.
+
+### Combat idle : danger réel mais lisible
+
+- Une session de combat en absence n'est **pas garantie gagnante** : épuisement des munitions, perte de résistance/rupture de l'arme, dette occulte excessive peuvent diminuer les chances de survie et mener à une défaite réelle si le joueur a pris ce risque.
+- Afficher les **stocks, durabilité, dette, soins et autonomie estimée** avant le lancement, ainsi que les risques possibles ; cette estimation n'est pas une promesse d'un nombre exact de combats victorieux.
+- Les modes de **réaction à un seuil** (arrêt du combat à X flèches restantes, à Y de durabilité, à Z de dette, PV faibles) sont une option de conception pour valoriser la préparation et l'automatisation ; les détails et leur disponibilité/conditions restent à arbitrer. Une stratégie sûre peut sacrifier le rendement sans supprimer la possibilité de prise de risque.
+- Moteur serveur autoritaire même en absence ; journaliser les événements, les dépenses, les interruptions, les dégâts, les morts et pertes suivant les règles décidées. **Pas d'immunité implicite au retour en ligne**, ni de sanctions aléatoires incompréhensibles ou de duplication de gains.
+- Ne pas transformer ces mécaniques en triple corvée : tester le **temps effectif de préparation, la survie, les ressources, l'XP/heure réelle et l'autonomie** des trois styles à puissance comparable, y compris bas niveaux et différentes R.
