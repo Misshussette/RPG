@@ -106,5 +106,14 @@ export function runCharacterAction(state, intent, now) {
 }
 export function viewCharacter(state) {
   assertCharacter(state);
-  return { ...state, totalLevel: totalLevel(state.skills), combatLevel: combatLevel(state.skills), inventoryOccupied: inventoryOccupied(state), combatStyles: availableCombatStyles(state.equipment.weapon) };
+  const total = totalLevel(state.skills);
+  return {
+    ...state,
+    totalLevel: total,
+    levelsGained: total - SKILL_IDS.length,
+    skillsAdvanced: SKILL_IDS.filter(id => levelForXp(state.skills[id]) > 1).length,
+    combatLevel: combatLevel(state.skills),
+    inventoryOccupied: inventoryOccupied(state),
+    combatStyles: availableCombatStyles(state.equipment.weapon),
+  };
 }
