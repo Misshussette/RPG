@@ -77,3 +77,15 @@ Un premier backend Node.js/PostgreSQL est présent dans [server/](server/README.
 **Attention : le client web actuel reste la maquette solo à stockage local et n'est pas encore connecté à cette API.** Le backend n'est pas prêt pour une ouverture publique ni pour les paiements. Les tests d'intégration PostgreSQL et le build complet n'ont pas été exécutés dans l'environnement de cet échange. Pour lancer l'API localement, lire [server/README.md](server/README.md).
 
 La version 0.2.0 décrit le début de la transition vers une application exclusivement en ligne ; elle ne signifie pas que cette transition est terminée.
+
+## Alpha 0.2.2 — refonte interface (11 octobre 2026)
+
+- Refonte du **combat compact** : héros et manifestation face à face, PV des deux adversaires, choix de la cible, enchaînement et résultat visibles sur desktop sans défilement du panneau central aux résolutions courantes.
+- **Inventaire latéral permanent** à droite, avec accès direct aux consommables et à l'équipement compatible ; vue d'inventaire complète toujours disponible.
+- **Journal dans le sens chronologique**, ancien en haut, récent en bas, défilement automatique vers les nouveautés.
+- Accueil et blocs d'informations réduits ; adaptation mobile testée sans débordement horizontal.
+- **Logo officiel fourni par le créateur intégré** dans `public/logo-eclipse.svg` (conteneur SVG avec image WebP intégrée, version réduite) ; aucun visuel d'un autre jeu repris.
+- Termes « région » et « rencontres par déplacement » remplacés par le vocabulaire de manifestation/perception. Les paliers R sont un principe narratif validé mais le contenu R0→R20 reste à implémenter.
+- Tests de structure ajoutés dans `tests/layout.test.js` ; vérification Chromium locale effectuée sur l'interface desktop/mobile et tests Node de l'alpha effectués.
+
+**Important :** le backend PostgreSQL 0.2.x n'est pas encore relié au client. Les parties de l'alpha restent dans `localStorage`, donc modifiables ; ne pas déployer en jeu public ni activer des achats avant le remplacement par une API serveur autoritaire. Les mécanismes originaux de gameplay restent en construction.
