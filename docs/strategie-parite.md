@@ -52,3 +52,19 @@ La première cartographie structurelle est enregistrée dans [l'inventaire fonct
 - [Scénarios de tests de parité](audit/contrats-tests-parite.md)
 
 L'examen repose sur l'implémentation analysée, en signalant les anciens commentaires devenus faux. Il reste un **audit statique**, avant les tests exécutables de notre moteur React/serveur.
+
+
+## Priorité rappelée — conserver la profondeur avant toute simplification (11 octobre 2026)
+
+**Intention du créateur :** repartir d'une **reconstruction fonctionnelle quasi complète** de l'application de référence étudiée, et non d'une mini-alpha que l'on agrandit mécanisme par mécanisme sans vision d'ensemble. L'application de référence est la référence de **parité de fonctionnement, de richesse et d'interconnexions** ; reproduire seulement les menus, quelques récoltes ou quelques ennemis n'atteint pas l'objectif.
+
+### Ordre impératif de travail
+1. Reconstituer l'ensemble des systèmes identifiés et leurs dépendances (combat, compétences, équipement, banque, métiers, forge, contrats, quêtes, donjons, boss, familiers, échanges, etc.) avec des **règles jouables, des données persistantes et des tests**.
+2. Dès la reconstruction, adapter les points structurels nécessaires à l'avenir (moteur serveur autoritaire, modèle de propriété des objets, logs et idempotence, progression R, déblocages, économie et multijoueur). Éviter une version jetable à réécrire une deuxième fois.
+3. **Ensuite seulement**, simplifier la navigation, les blocs et les menus, conserver les interactions et la profondeur, rééquilibrer les difficultés et remplacer intégralement l'identité narrative/graphique.
+4. Ne jamais afficher une fonction comme « reconstruite » si seul son panneau ou sa fiche existe. Les **17 compétences visibles** du lot 0.3.0 ne signifient pas que leurs mécaniques sont réalisées : seules les activités réellement implémentées le sont.
+
+### Architecture de déblocage anticipée
+La reconstruction doit permettre d'**exposer un système avant d'en ouvrir toutes les capacités**. Ne pas coder des versions parallèles ou dupliquées de la forge, des contrats ou des métiers ; chaque système conserve ses entités de référence et des capacités accessibles en fonction des conditions validées.
+
+Les règles de déblocage (Renaissance, exploits, savoir-faire, prérequis d'objets, raretés, monnaies gagnées en jeu) seront des données de jeu contrôlées côté serveur, non des boutons cachés conditionnés uniquement dans React. Voir [Renaissance](renaissance.md) pour les idées à arbitrer.
