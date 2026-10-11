@@ -125,3 +125,9 @@ Ces documents sont des constats techniques d'analyse statique et une spécificat
 L'indicateur **niveau total** de la référence est la **somme des niveaux des 17 compétences** (un personnage débutant a donc 17 et non 1). Pour éviter de le confondre avec un niveau global de personnage, l'en-tête de l'interface React présente désormais : **niveaux gagnés** (= somme des niveaux − 17), **niveau de combat** (= moyenne entière des cinq compétences de combat) et **compétences progressées** (= compétences au-dessus du niveau 1). La somme historique reste indiquée dans le panneau des compétences avec l'intitulé explicite « niveaux cumulés ». La révision serveur reste disponible dans les échanges API mais n'est plus affichée comme statistique de gameplay.
 
 **Aucune modification de formule, de base PostgreSQL ou de progression enregistrée.** Un exemple reproductible : 16 compétences niveau 1 et extraction niveau 2 donnent 18 niveaux cumulés, +1 niveau gagné, combat niveau 1 et 1/17 compétence progressée.
+
+## Atelier de référence privée locale (version 0.3.2)
+
+Pour pouvoir confronter la totalité des mécanismes à l'application étudiée, un **serveur de référence en local** est disponible via `npm run reference:dev`, sur `http://127.0.0.1:4174/`. Cette commande nécessite d'abord d'importer une archive HTML privée dans `private-reference/` (exclu de Git). Voir le [guide de référence locale](docs/reference-privee-locale.md).
+
+**Distinction obligatoire :** la référence privée exécute le code original fourni uniquement pour comparaison, avec son stockage local. **Ce n'est pas une copie React, ni une progression PostgreSQL, ni une application multijoueur**. Elle ne doit pas être publiée ou exposée. La reconstruction serveur autoritaire reste distincte (`/parity.html`), et sa parité fonctionnelle doit être validée module par module. Cette approche préserve la richesse du point de départ sans prétendre qu'elle a déjà été transférée au serveur.
