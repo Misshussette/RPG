@@ -82,3 +82,12 @@ Ce registre distingue les **règles retenues dans nos échanges** des **orientat
 - La coopération facilite le franchissement du seuil collectif ; elle ne doit pas être strictement obligatoire.
 - Le double seuil collectif/individuel ne garantit jamais un objet exceptionnel : le tirage rare reste nécessaire.
 - Ce repère R20 sert de contrainte de conception ; les autres R doivent recevoir leur propre équilibrage.
+
+## Architecture en ligne unifiée — décision validée le 11 octobre 2026
+
+- **Jeu exclusivement en ligne** : pas de mode hors ligne persistant, pas de SQLite client ni de sauvegarde de progression en local. L'accès solo et multijoueur s'effectue sur le **même backend**, avec **un compte et une progression unique**.
+- **Serveur autoritaire dès la prochaine étape technique** : le client demande des actions, le serveur valide les droits, le temps et les règles, génère les tirages de combat/butin et applique les changements d'état via transactions. Aucune donnée de progression soumise par le client n'est considérée comme véridique.
+- **PostgreSQL sur VPS** pour les comptes, personnages, objets, combats, transactions et paiements ; API HTTPS, cookies de session sécurisés, permissions minimales, limites de requêtes, journaux, sauvegardes chiffrées et tests de restauration. Éviter de connecter directement le navigateur à la base avec des privilèges élevés.
+- **Achats sécurisés en priorité absolue** : paiement créé côté serveur, confirmation par webhooks Stripe signés, contrôle montant/devise/identifiant, traitement idempotent en transaction, ledger immuable des crédits et droits, prévention du double crédit, gestion des remboursements/rétrofacturations, journal d'audit. Aucun secret Stripe côté navigateur ; aucune attribution sur la seule base du retour client.
+- **Déploiement initial simple** sur un VPS avec isolation services/API/DB, reverse proxy TLS, secrets hors Git et sauvegardes externes ; montée en charge par mesure, Kubernetes seulement si la croissance le justifie. Prévoir dès le départ des processus API sans état et des migrations de base reproductibles afin de faciliter une future mise à l'échelle.
+- L'alpha solo 0.1.1 à sauvegarde `localStorage` est **obsolète en tant que fondation de stockage** : prototype UI/règles seulement. Ne pas mettre en production ni lui brancher des achats ou des échanges avant création du backend autoritaire.
