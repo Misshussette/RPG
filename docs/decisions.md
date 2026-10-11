@@ -65,3 +65,11 @@ Ce registre distingue les **règles retenues dans nos échanges** des **orientat
 - **Retrait des fonctions d'import/export de sauvegarde** de l'alpha actuelle ; cela réduit un vecteur évident sans constituer une protection complète.
 - Le nombre de monstres dans une alpha ne limite pas le futur bestiaire. Quatre créatures représentent uniquement le contenu temporaire du prototype.
 - Contrôles nécessaires : temps et RNG serveur, transaction de données atomique, contrôle de droits et de fréquence, journal d'audit et gestion des rejouements.
+
+## Boss mondiaux — double seuil pour le butin exceptionnel (proposition du 11 octobre 2026)
+
+- Un équipement exceptionnel ne peut être tiré que lorsque les **dégâts cumulés sur la manifestation du palier R** atteignent un **seuil collectif** propre à cette manifestation.
+- Chaque candidat doit également remplir un **seuil individuel de contribution** ; être seul dans sa catégorie ou premier du classement ne dispense d'aucun seuil.
+- Lorsque les deux conditions sont réunies, un **tirage de rareté** décide si un exceptionnel existe ; la condition ne garantit jamais le drop. Si un exceptionnel tombe, son attribution entre candidats éligibles reste à définir (pondération ou tirage).
+- Seuils et probabilités numériques non validés : ils seront calibrés sur la durée de l'événement, le niveau R et la population, sans modifier rétroactivement les règles d'un événement en cours.
+- Décision restant à prendre : faut-il un tirage unique par manifestation à la fin de l'événement, et comment comptabiliser soins et soutien sans les confondre avec les dégâts collectifs ?
