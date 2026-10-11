@@ -80,13 +80,18 @@ function Journal({character}) {
   return <Pane title="JOURNAL" meta="ANCIEN → RÉCENT" className="eb-journal"><div className="eb-journal-scroll" role="log">{character.log.map((entry,index)=><div key={`${entry.at}-${index}`}><span>{new Date(entry.at).toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})}</span><p>{entry.message}</p></div>)}</div></Pane>;
 }
 function WorkshopIntro({workshop}) {
-  if (workshop.id==='overview') return <Pane title="ORGANISATION DES MÉTIERS" meta="PREMIÈRE REFONTE DE NAVIGATION">
-    <p className="eb-note">Choisissez un lieu dans le menu pour retrouver les compétences et activités associées. Les 17 compétences restent distinctes, avec leurs niveaux et leur XP inchangés. Plusieurs lieux peuvent faire appel à la même compétence.</p>
-    <div className="eb-workshop-cards">{WORKSHOPS.filter(w=>w.id!=='overview').map(w=><div key={w.id} className="eb-workshop-card"><strong>{w.icon} {w.label}</strong><small>{w.subtitle}</small></div>)}</div>
-  </Pane>;
-  return <Pane title={workshop.label.toUpperCase()} meta="ORGANISATION DES ATELIERS">
-    <p className="eb-workshop-description">{workshop.subtitle}. Les compétences de ce lieu restent indépendantes. Une même recette ou ressource n’est jamais dupliquée entre les ateliers.</p>
-    <div className="eb-workshop-capabilities">{workshop.preview.map(name=><div key={name} className="eb-capability"><span>{name}</span><small>À reconstruire</small></div>)}</div>
+  const [activeRef,setActiveRef]=useState(workshop.features[0]?.reference||'');
+  useEffect(()=>{setActiveRef(workshop.features[0]?.reference||'')},[workshop.id]);
+  const active=workshop.features.find(f=>f.reference===activeRef)||workshop.features[0];
+  return <Pane title={workshop.id==='overview'?'ORGANISATION DES SYSTÈMES':workshop.label.toUpperCase()} meta="ÉCRANS SOURCÉS · MÉCANIQUES À RECONSTRUIRE">
+    <p className="eb-workshop-description">{workshop.subtitle}. Les rubriques ci-dessous correspondent aux fonctions relevées dans l'application de référence. Elles ne sont pas encore toutes jouables ici.</p>
+    <div className="eb-workshop-capabilities" role="group" aria-label="Fonctions de cet atelier">
+      {workshop.features.map(f=><button type="button" key={f.reference} className={`eb-capability ${active?.reference===f.reference?'selected':''}`} onClick={()=>setActiveRef(f.reference)} aria-pressed={active?.reference===f.reference}>
+        <span>{f.label}</span><small>{f.reference.startsWith('planned:')?'Conception':'Référence'}</small>
+      </button>)}
+    </div>
+    {active && <div className="eb-workshop-detail" role="status"><strong>{active.label}</strong><p>{active.detail}</p><small>{active.reference.startsWith('planned:')?'Ajout décidé ou envisagé — mécanique pas encore implémentée':'Fonction analysée dans la référence — sa reconstruction React/serveur est encore à vérifier'}</small></div>}
+    {workshop.id==='overview'&&<div className="eb-workshop-cards">{WORKSHOPS.filter(w=>w.id!=='overview').map(w=><div key={w.id} className="eb-workshop-card"><strong>{w.icon} {w.label}</strong><small>{w.features.length} rubriques fonctionnelles · {w.skills.length} rattachements de compétences</small></div>)}</div>}
   </Pane>;
 }
 function World({character,revision,onAction,onLogout,busy}) {
@@ -104,15 +109,15 @@ function World({character,revision,onAction,onLogout,busy}) {
       <div className="eb-caption more">À RECONSTRUIRE</div>
       <span>Banque, marché et enchères</span><span>Quêtes, succès et Codex</span><span>Renaissances et guildes</span>
     </nav>
-    <div className="eb-left-bottom"><small>RECONSTRUCTION · ALPHA 0.3.3</small><p>Ateliers réorganisés · règles serveur inchangées</p><button onClick={onLogout} disabled={busy}>Se déconnecter</button></div>
+    <div className="eb-left-bottom"><small>RECONSTRUCTION · ALPHA 0.3.4</small><p>Ateliers réorganisés · règles serveur inchangées</p><button onClick={onLogout} disabled={busy}>Se déconnecter</button></div>
   </aside>
   <div className="eb-main"><header className="eb-top"><div><small>ATELIERS / {workshop.label.toUpperCase()}</small><h1>{character.name} <em>R{character.rebirth}</em></h1></div>
     <div className="eb-summary"><span title="Niveaux gagnés au-dessus des 17 niveaux de départ."><small>NIVEAUX GAGNÉS</small><b>+{character.levelsGained ?? character.totalLevel - SKILLS.length}</b></span><span title="Moyenne des cinq compétences de combat, arrondie à l’entier inférieur."><small>NIVEAU COMBAT</small><b>{character.combatLevel}</b></span><span title="Nombre de compétences ayant dépassé le niveau 1."><small>COMPÉTENCES PROGRESSÉES</small><b>{character.skillsAdvanced ?? SKILLS.filter(s=>levelForXp(character.skills[s.id])>1).length}<em>/{SKILLS.length}</em></b></span></div>
   </header>
   <div className="eb-center">
     <WorkshopIntro workshop={workshop}/>
-    <div id="competences"><Skills character={character} selected={selected} onSelect={setSelected} workshopId={workshop.id}/></div>
-    <div id="activites"><Activities character={character} selected={selected} onSelect={setSelected} workshopId={workshop.id} busy={busy} onAction={onAction}/></div>
+    {(workshop.id==='overview' || workshop.skills.length>0) && <div id="competences"><Skills character={character} selected={selected} onSelect={setSelected} workshopId={workshop.id}/></div>}
+    {(workshop.id==='overview' || workshop.skills.length>0) && <div id="activites"><Activities character={character} selected={selected} onSelect={setSelected} workshopId={workshop.id} busy={busy} onAction={onAction}/></div>}
   </div></div>
   <aside className="eb-right"><div id="inventaire"><Inventory character={character}/></div><div id="equipement"><Equipment character={character}/></div><Journal character={character}/></aside>
  </div>;
