@@ -118,3 +118,26 @@
 @media(max-width:1200px){.combat-shell{grid-template-columns:minmax(185px,.75fr) minmax(0,1.6fr)}.fighter-portrait{height:130px;font-size:58px}}
 @media(max-width:900px){.combat-shell{grid-template-columns:minmax(170px,.7fr) minmax(0,1.5fr)}}
 @media(max-width:650px){.combat-shell{display:flex;flex-direction:column}.fighter-portrait{height:115px;font-size:55px}.fighter-title strong{font-size:12px}.fighter-title small{font-size:9px}.fighter-title{min-height:55px}.fighters{grid-template-columns:minmax(0,1fr) 25px minmax(0,1fr)}.arena-versus{font-size:12px}.combat-actions{justify-content:flex-start}.compact-title .chapter-badge{display:none}}
+
+/* v0.2.3 — Inventaire intégral dans la capacité du personnage, sans l'altérer. */
+.activity-sidebar{padding:12px 10px;gap:9px;min-height:0;overflow:hidden}
+.quick-inventory{padding-bottom:8px}
+.quick-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:4px}
+.quick-item{aspect-ratio:1/1;padding:2px;border-radius:4px}
+.quick-item>span{font-size:19px}
+.quick-item.empty-slot{background:#141c2a;border:1px solid #2a3546;opacity:.8}
+.quick-inventory-link{font-size:10px;margin-top:7px}
+.side-actions{display:flex;flex-direction:column;gap:5px;min-height:0;max-height:27vh;overflow:hidden;border-bottom:1px solid #303a4a;padding-bottom:9px}
+.side-actions-list{display:flex;flex-direction:column;gap:4px;overflow-y:auto;min-height:0;scrollbar-width:thin}
+.side-action{display:flex;flex-direction:column;gap:3px;text-align:left;border:1px solid #303d51;background:#172032;padding:6px 7px;border-radius:5px;color:#e3dfd5;width:100%;font:inherit;cursor:pointer}
+.side-action strong{font-size:10px;font-weight:650}
+.side-action small{font-size:9px;color:#a9b5c9;line-height:1.35}
+.side-action.actionable{border-color:#9a8251}
+.journal-section{min-height:100px;flex:1}
+.activity-title{padding-bottom:6px}
+.activity-entries{margin-top:5px}
+.sidebar-bottom p{font-size:10px;line-height:1.35;margin:6px 0}
+.sidebar-bottom .muted-button{font-size:10px;padding:4px 0}
+@media (min-width:901px){.activity-sidebar{position:sticky;height:100vh;top:0}}
+@media (max-width:900px){.activity-sidebar{height:auto;max-height:none;overflow:visible}.side-actions{max-height:230px}.quick-grid{grid-template-columns:repeat(8,minmax(0,1fr))}.journal-section{max-height:270px}}
+@media (max-width:650px){.quick-grid{grid-template-columns:repeat(6,minmax(0,1fr))}.activity-sidebar{padding:10px}.side-actions{max-height:240px}}
