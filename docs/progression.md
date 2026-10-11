@@ -23,3 +23,7 @@ La progression doit encourager des sessions courtes mais utiles : lancer une act
 ## À définir
 
 Liste exacte des compétences, système d'expérience, rythme R0, prix des améliorations, gains hors ligne, stockage et mécanismes d'automatisation.
+
+## Ateliers regroupés et fabrication à partir de l'objet final — piste de conception (11 octobre 2026)
+
+Les compétences restent indépendantes ; plusieurs peuvent être présentées dans un même atelier fonctionnel (mine/fonderie, armurerie, culture/alchimie, etc.). Le joueur pourrait choisir un **produit final** et faire planifier ses sous-recettes, l'acquisition des matériaux, la transformation et la fabrication finale, avec prérequis, coûts, durée et alternatives d'approvisionnement explicites. L'exécution serait **autorisée et persistée côté serveur** ; aucune fabrication ne doit ignorer le niveau minimum ou le bon outil. Référence détaillée : [conception des ateliers et de la fabrication en chaîne](conception-ateliers-production-marche.md). Ce sont des hypothèses à tester après la reconstruction fonctionnelle, **pas des recettes ou valeurs validées**.
