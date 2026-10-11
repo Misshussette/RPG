@@ -39,3 +39,7 @@ Les futures étapes doivent être suivies sur une **matrice de parité vérifiab
 ## Ce qui n'est pas encore établi
 
 La parité exacte n'a pas été démontrée : l'audit du contenu complet de l'ASAR et de ses dépendances reste à achever. La liste canonique des compétences, leur accessibilité simultanée, les règles détaillées et le statut des composants tiers doivent être consignés avant de modifier les systèmes de progression.
+
+## Audit disponible
+
+La première cartographie structurelle est enregistrée dans [l'inventaire fonctionnel](audit/inventaire-fonctionnel.md) et sa [matrice de parité](audit/matrice-parite.md). Elle atteste la présence des systèmes dans les sources examinées, **pas** leur compatibilité directe avec un backend sécurisé ou une parité validée par test.
