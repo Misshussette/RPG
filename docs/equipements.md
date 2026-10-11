@@ -51,3 +51,11 @@ Le boss transmet une part de sa puissance à son premier détenteur. Chaque chan
 - Achat ou échange d'une arme de boss : inscription dans le Codex si découverte, **aucun fait d'armes de victoire**.
 - La victoire qualifiante sur le boss est enregistrée indépendamment du butin.
 - Une découverte Codex ou une victoire ne disparaît pas à la revente ou lors d'une Renaissance.
+
+## Usure des armes de mêlée — principe retenu le 11 octobre 2026
+
+Le système de Mêlée doit comporter une **durabilité des armes qui diminue à l'usage** et une possibilité de **réparation et renforcement de la résistance**. L'amélioration de durabilité est une voie de maîtrise significative de la forge/métallurgie : elle réduit l'entretien futur et offre un choix de progression, plutôt qu'un simple paiement répétitif. Seuils, prix, fréquence, usure des armures, interface d'auto-entretien et traitement d'une arme épuisée restent **à définir et tester**. Une pièce précieuse ne doit jamais disparaître sans avertissement.
+
+**Exception à préserver :** les armes exceptionnelles de boss sont déjà définies comme **non améliorables** ; le renforcement de la durabilité ne s'y applique pas automatiquement. Leur résistance initiale, l'éventuelle usure et les réparations autorisées nécessitent une décision distincte avant toute implémentation.
+
+La chaîne d'approvisionnement de l'archer reste volontairement exigeante. Une éventuelle « Dette Occulte » pour le mage reste **une simple proposition non validée**. Voir [conception des ateliers et de l'équilibrage de combat](conception-ateliers-production-marche.md).
