@@ -131,3 +131,7 @@ L'indicateur **niveau total** de la référence est la **somme des niveaux des 1
 Pour pouvoir confronter la totalité des mécanismes à l'application étudiée, un **serveur de référence en local** est disponible via `npm run reference:dev`, sur `http://127.0.0.1:4174/`. Cette commande nécessite d'abord d'importer une archive HTML privée dans `private-reference/` (exclu de Git). Voir le [guide de référence locale](docs/reference-privee-locale.md).
 
 **Distinction obligatoire :** la référence privée exécute le code original fourni uniquement pour comparaison, avec son stockage local. **Ce n'est pas une copie React, ni une progression PostgreSQL, ni une application multijoueur**. Elle ne doit pas être publiée ou exposée. La reconstruction serveur autoritaire reste distincte (`/parity.html`), et sa parité fonctionnelle doit être validée module par module. Cette approche préserve la richesse du point de départ sans prétendre qu'elle a déjà été transférée au serveur.
+
+## Pistes de conception : ateliers, fabrication automatisée et marché (11 octobre 2026)
+
+Voir [l'organisation des métiers, les commandes de fabrication en chaîne, le marché offre/demande et l'humour contextualisé](docs/conception-ateliers-production-marche.md). **Pistes à tester**, pas des seuils validés : garder les 17 compétences, conserver la richesse fonctionnelle de la référence, simplifier **la navigation** et non les mécanismes. R0 ne doit pas nécessairement tout accomplir.
