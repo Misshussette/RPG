@@ -30,7 +30,7 @@ Les compétences restent indépendantes ; plusieurs peuvent être présentées d
 
 ## Précision : bûcheronnage et déduction automatique des stocks (11 octobre 2026)
 
-- **Bûcheronnage** reste une compétence complète et indépendante ; atelier d'accès « Forêt & Bois » envisagé. Ses ressources alimentent l'Armurerie (arcs/flèches) et les autres fabrications qui nécessitent du bois.
+- **Bûcheronnage** reste une compétence complète et indépendante, même si l'atelier d'accès envisagé est désormais **« Ressources & Fonderie »** (avec Extraction et transformation des minerais). Ses ressources alimentent l'Armurerie (arcs/flèches) et les autres fabrications qui nécessitent du bois.
 - Une commande de craft depuis l'objet final doit d'abord vérifier les **lingots/composants déjà disponibles**, puis le **minerai/bois réellement manquant**, et enfin les coûts d'or et outils requis. **Rien à miner si le minerai existant suffit, rien à fondre si les lingots existants suffisent.**
 - Tout stock et coût doit être recalculé et consommé une seule fois côté serveur ; prérequis par étape, sans duplication ni modification des règles d'XP des compétences.
 - Exemple fictif et méthode dans [la conception des ateliers et fabrications](conception-ateliers-production-marche.md). Les quantités et coûts illustratifs ne sont pas des recettes validées.
