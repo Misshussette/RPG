@@ -88,3 +88,18 @@ Les boss mondiaux respectent le système déjà discuté de **seuil collectif de
 3. Faire une **table de correspondance avec les 26 monstres de la référence**, pour conserver les mécaniques utiles même si les noms, visuels et l'univers changent.
 4. Concevoir 3–5 **prototypes de silhouettes de monstres** très différents, ainsi que portrait, icône et représentation dans le journal des contrats, puis étendre à la totalité.
 5. Concevoir les boss séparément : phases, variantes de Renaissance, contributions, drops et événements de guilde éventuellement associés mais non létaux.
+
+## Planche de direction artistique du 17 octobre 2026 — 36 silhouettes
+
+Deux planches d'ensemble ont été réalisées pour évaluer la **diversité des silhouettes et des postures** du bestiaire proposé (36 créatures sur 6 paliers). Les créatures ont des morphologies différentes : quadrupèdes, volants, verticales, rampants, corps serpentin, masses minérales et entités spectrales.
+
+**Statut exact : concept visuel seulement.** Une planche ne correspond pas à 36 portraits haute résolution indépendants. Les silhouettes y sont petites, les numérotations et contours peuvent comporter des approximations ; elles ne constituent pas des fichiers utilisables tels quels dans les combats ni des illustrations à fond transparent garanties.
+
+Un paquet de revue local a été préparé dans la conversation sous le nom `Eclipse_Blanche_Bestiaire_36_Concept.zip`, comprenant deux planches, un HTML de consultation, un manifeste JSON et **36 vignettes de faible définition extraites pour repérage**. **Ce fichier binaire n'a pas été envoyé sur GitHub** ; seul l'avancement documentaire est inscrit ici.
+
+### Production des véritables portraits
+
+- Produire les 36 créatures en **illustrations indépendantes**, cadrées de manière adaptée à la silhouette (animal rampant, rapace en piqué, colosse, végétal, spectre en suspension).
+- Fond réellement transparent (alpha), proportions cohérentes, pas de décors résiduels ni de bordures, pas de répétition mécanique d'une pose de mannequin trois-quarts avec membre droit avancé.
+- Tester sur fond d'interface clair/sombre, en vignette de Codex et dans le panneau de combat ; valider les fichiers un par un avant tout remplacement d'assets de l'app.
+- Ne pas transformer la planche générale en portraits définitifs en agrandissant les petits recadrages.
