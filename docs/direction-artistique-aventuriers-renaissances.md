@@ -8,9 +8,17 @@
 
 Les dix personnages sont des **archétypes visuels**, **pas dix classes mécaniques exclusives** : les trois disciplines de combat (mêlée, distance, magie) et les combinaisons hybrides restent possibles. Ne pas supprimer ni fusionner les 17 compétences existantes.
 
+## Nom du joueur et apparence : règle validée
+
+**Le nom affiché dans le jeu est toujours celui choisi par le joueur pour son personnage**, et non le nom de la planche conceptuelle. « Grommel », « Lira », « Orvan », etc. sont uniquement des **noms de travail / identifiants d'archétypes graphiques** destinés à différencier et produire les illustrations ; ils ne sont ni des noms imposés, ni des personnages PNJ obligatoires, ni des classes supplémentaires.
+
+Exemple : une joueuse choisit le visuel de référence « Grommel », mais nomme son personnage « Biscotte » : partout dans l'interface, le combat et les journaux, **Biscotte** reste son nom, du R0 au R20. Sa silhouette suit la progression de l'archétype graphique choisi, sans changer son identité ou son nom.
+
+L'avatar visuel et le nom du personnage sont deux données distinctes. Un archétype visuel peut être sélectionné par plusieurs joueurs et n'octroie pas d'avantage de classe en lui-même.
+
 ## Les dix personnages de référence
 
-| Identité | Base / tonalité | Affinité visuelle initiale | Forme iconique R20 |
+| Nom de référence (non affiché au joueur) | Base / tonalité | Affinité visuelle initiale | Forme iconique R20 |
 |---|---|---|---|
 | **Grommel** | Guerrier rond, équipement récupéré, bravoure un peu incertaine | Mêlée / Défense | **Le Rempart qui Rit Encore** |
 | **Lira** | Rôdeuse malicieuse, capuche verte, arc rustique | Distance / Furtivité | **L’Ombre des Chemins Perdus** |
