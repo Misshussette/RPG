@@ -21,7 +21,7 @@ export async function getParityCharacter(db,accountId) {
   return { status: 200, body: { character:viewCharacter(row.rows[0].state), revision:Number(row.rows[0].revision) } };
 }
 export async function applyParityAction(db,accountId,intent,now) {
-  if (!intent || !['start','settle','stop'].includes(intent.action)) return { status: 400, body: { error:'Action inconnue.' } };
+  if (!intent || !['start','settle','stop','combat_start','combat_attack','combat_rest'].includes(intent.action)) return { status: 400, body: { error:'Action inconnue.' } };
   const found = await db.query('SELECT state,revision FROM parity_characters WHERE account_id=$1 FOR UPDATE',[accountId]);
   const row=found.rows[0];
   if (!row) return { status: 404, body: { error:'Créer un personnage avant de jouer.' } };
