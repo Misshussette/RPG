@@ -1,3 +1,4 @@
+import { combatSnapshot, fightAction } from './combat.js';
 import { ACTIVITIES, BASE_INVENTORY_CAPACITY, COMBAT_SKILLS, EQUIPMENT_SLOTS, INITIAL_OFFLINE_CAP_MS, ITEMS, RULESET_VERSION, SKILL_IDS } from './catalog.js';
 
 // Courbe de référence auditée ; implémentation indépendante sans reprise du code tiers.
@@ -65,6 +66,11 @@ export function runCharacterAction(state, intent, now) {
   try { assertCharacter(state); } catch { return { error: 'Personnage incompatible avec ce moteur.' }; }
   const character = copy(state);
   const action = intent?.action;
+  if (['combat_start','combat_attack','combat_rest'].includes(action)) {
+    const result=fightAction(character,intent,now);
+    if (!result.error) assertCharacter(result.character);
+    return result;
+  }
   if (action === 'start') {
     const selected = ACTIVITIES[intent.activityId];
     if (!selected) return { error: 'Activité inconnue.' };
@@ -115,5 +121,6 @@ export function viewCharacter(state) {
     combatLevel: combatLevel(state.skills),
     inventoryOccupied: inventoryOccupied(state),
     combatStyles: availableCombatStyles(state.equipment.weapon),
+    combat: combatSnapshot(state),
   };
 }
