@@ -11,7 +11,7 @@ export default function CombatPanel({character,busy,onAction}) {
   return <section className="eb-fight" aria-label="Combat R0">
     <header className="eb-fight-heading"><div><small>COMBAT & DONJONS · PREMIÈRE RENCONTRE</small><h2>Rat des Ruines</h2><p>Premier combat jouable sur le serveur. Mêlée uniquement ; statistiques provisoires.</p></div><span>R0 · INITIATION</span></header>
     <div className="eb-fight-stage">
-      <div className="eb-fight-side"><strong>{character.name}</strong><div className="eb-fight-figure">⚔</div><div className="eb-fight-health"><div style={{width:`${100*hp/maxHp}%`}}/></div><small>{hp} / {maxHp} PV</small></div>
+      <div className="eb-fight-side player"><strong>{character.name}</strong><small className="eb-fight-player-meta">R{character.rebirth} · Mêlée</small><div className="eb-fight-figure player-figure"><img src="/player/voyageur.svg" alt={`Représentation provisoire de ${character.name}, aventurier encapuchonné`}/></div><div className="eb-fight-health"><div style={{width:`${100*hp/maxHp}%`}}/></div><small>{hp} / {maxHp} PV</small></div>
       <span className="eb-fight-versus">VS</span>
       <div className="eb-fight-side"><strong>{FIRST_ENCOUNTER.name}</strong><div className="eb-fight-figure"><img src={FIRST_ENCOUNTER.portrait} alt={FIRST_ENCOUNTER.name}/></div><div className="eb-fight-health enemy"><div style={{width:`${100*monsterHp/FIRST_ENCOUNTER.hp}%`}}/></div><small>{monsterHp} / {FIRST_ENCOUNTER.hp} PV</small></div>
     </div>
