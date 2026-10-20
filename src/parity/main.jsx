@@ -4,6 +4,7 @@ import { ACTIVITIES, EQUIPMENT_SLOTS, ITEMS, SKILLS } from './catalog.js';
 import { XP_THRESHOLDS, levelForXp } from './engine.js';
 import { WORKSHOPS, workshopById, skillInWorkshop } from './navigation.js';
 import './parity.css';
+import Codex from './Codex.jsx';
 
 const fmt = n => new Intl.NumberFormat('fr-FR').format(n);
 const groups = [
@@ -97,27 +98,32 @@ function WorkshopIntro({workshop}) {
 function World({character,revision,onAction,onLogout,busy}) {
   const [selected,setSelected]=useState('mining');
   const [workshopId,setWorkshopId]=useState('overview');
+  const [screen,setScreen]=useState('workshops');
   const workshop=workshopById(workshopId);
-  const chooseWorkshop=id=>{setWorkshopId(id);const entry=workshopById(id);if(entry.skills.length && !entry.skills.includes(selected))setSelected(entry.skills[0]);};
+  const chooseWorkshop=id=>{setScreen('workshops');setWorkshopId(id);const entry=workshopById(id);if(entry.skills.length && !entry.skills.includes(selected))setSelected(entry.skills[0]);};
   return <div className="eb-shell"><aside className="eb-left">
     <div className="eb-brand"><img src="/logo-eclipse.svg" alt="L’Éclipse Blanche"/><div><small>LA RÉALITÉ SE FISSURE</small><b>L’ÉCLIPSE BLANCHE</b></div></div>
     <nav aria-label="Ateliers et activités"><div className="eb-caption">VOTRE MONDE</div>
       {WORKSHOPS.map(w=><button type="button" key={w.id} className={`eb-nav-item ${workshop.id===w.id?'selected':''}`} onClick={()=>chooseWorkshop(w.id)} aria-current={workshop.id===w.id?'page':undefined}><span className="eb-nav-icon">{w.icon}</span>{w.label}</button>)}
+      <div className="eb-caption more">ARCHIVES DU MONDE</div>
+      <button type="button" className={`eb-codex-nav ${screen==='codex'?'selected':''}`} onClick={()=>setScreen('codex')} aria-current={screen==='codex'?'page':undefined}>✦ Codex du bestiaire <small>36</small></button>
       <div className="eb-caption more">PERSONNAGE</div>
       <a href="#competences">Compétences <small>{SKILLS.length}</small></a>
       <a href="#inventaire">Inventaire</a><a href="#equipement">Équipement</a>
       <div className="eb-caption more">À RECONSTRUIRE</div>
-      <span>Banque, marché et enchères</span><span>Quêtes, succès et Codex</span><span>Renaissances et guildes</span>
+      <span>Banque, marché et enchères</span><span>Quêtes et succès</span><span>Renaissances et guildes</span>
     </nav>
     <div className="eb-left-bottom"><small>RECONSTRUCTION · ALPHA 0.3.4</small><p>Ateliers réorganisés · règles serveur inchangées</p><button onClick={onLogout} disabled={busy}>Se déconnecter</button></div>
   </aside>
-  <div className="eb-main"><header className="eb-top"><div><small>ATELIERS / {workshop.label.toUpperCase()}</small><h1>{character.name} <em>R{character.rebirth}</em></h1></div>
+  <div className="eb-main"><header className="eb-top"><div><small>{screen==='codex'?'ARCHIVES / CODEX DES CRÉATURES':`ATELIERS / ${workshop.label.toUpperCase()}`}</small><h1>{character.name} <em>R{character.rebirth}</em></h1></div>
     <div className="eb-summary"><span title="Niveaux gagnés au-dessus des 17 niveaux de départ."><small>NIVEAUX GAGNÉS</small><b>+{character.levelsGained ?? character.totalLevel - SKILLS.length}</b></span><span title="Moyenne des cinq compétences de combat, arrondie à l’entier inférieur."><small>NIVEAU COMBAT</small><b>{character.combatLevel}</b></span><span title="Nombre de compétences ayant dépassé le niveau 1."><small>COMPÉTENCES PROGRESSÉES</small><b>{character.skillsAdvanced ?? SKILLS.filter(s=>levelForXp(character.skills[s.id])>1).length}<em>/{SKILLS.length}</em></b></span></div>
   </header>
   <div className="eb-center">
+    {screen==='codex' ? <Codex/> : <>
     <WorkshopIntro workshop={workshop}/>
     {(workshop.id==='overview' || workshop.skills.length>0) && <div id="competences"><Skills character={character} selected={selected} onSelect={setSelected} workshopId={workshop.id}/></div>}
     {(workshop.id==='overview' || workshop.skills.length>0) && <div id="activites"><Activities character={character} selected={selected} onSelect={setSelected} workshopId={workshop.id} busy={busy} onAction={onAction}/></div>}
+    </>}
   </div></div>
   <aside className="eb-right"><div id="inventaire"><Inventory character={character}/></div><div id="equipement"><Equipment character={character}/></div><Journal character={character}/></aside>
  </div>;
