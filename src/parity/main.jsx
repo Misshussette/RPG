@@ -5,6 +5,7 @@ import { XP_THRESHOLDS, levelForXp } from './engine.js';
 import { WORKSHOPS, workshopById, skillInWorkshop } from './navigation.js';
 import './parity.css';
 import Codex from './Codex.jsx';
+import CombatPanel from './CombatPanel.jsx';
 
 const fmt = n => new Intl.NumberFormat('fr-FR').format(n);
 const groups = [
@@ -120,6 +121,7 @@ function World({character,revision,onAction,onLogout,busy}) {
   </header>
   <div className="eb-center">
     {screen==='codex' ? <Codex/> : <>
+    {workshop.id==='combat' && <CombatPanel character={character} busy={busy} onAction={onAction}/>}
     <WorkshopIntro workshop={workshop}/>
     {(workshop.id==='overview' || workshop.skills.length>0) && <div id="competences"><Skills character={character} selected={selected} onSelect={setSelected} workshopId={workshop.id}/></div>}
     {(workshop.id==='overview' || workshop.skills.length>0) && <div id="activites"><Activities character={character} selected={selected} onSelect={setSelected} workshopId={workshop.id} busy={busy} onAction={onAction}/></div>}
@@ -139,7 +141,7 @@ function App() {
  const guarded=async fn=>{setBusy(true);setError('');try {await fn();}catch(e){setError(e.message)}finally{setBusy(false)}};
  const credentials=(mode,email,password)=>guarded(async()=>{await api(`/api/${mode}`,{email,password});await reload()});
  const create=name=>guarded(async()=>{const r=await api('/api/v2/character',{name});setCharacter(r.character);setRevision(r.revision);setPhase('play')});
- const action=(type,activityId)=>guarded(async()=>{const r=await api('/api/v2/action',{action:type,...(activityId?{activityId}:{})});setCharacter(r.character);setRevision(r.revision)});
+ const action=(type,activityId)=>guarded(async()=>{const r=await api('/api/v2/action',{action:type,...(activityId?{[type==='combat_start'?'monsterId':'activityId']:activityId}:{})});setCharacter(r.character);setRevision(r.revision)});
  const logout=()=>guarded(async()=>{await api('/api/logout',{});setCharacter(null);setPhase('login')});
  useEffect(()=>{if(phase!=='play'||!character?.activity)return;const tick=setInterval(()=>{if(!document.hidden && !busy)action('settle')},8000);return ()=>clearInterval(tick)},[phase,character?.activity?.id,busy]);
  return <>{phase==='loading'?<div className="eb-loading">Connexion au monde…</div>:phase==='login'?<Credentials onLogin={credentials} busy={busy}/>:phase==='create'?<CharacterCreation busy={busy} onCreate={create}/>:phase==='play'?<World character={character} revision={revision} onAction={action} onLogout={logout} busy={busy}/>:<div className="eb-auth-frame"><h2>Serveur indisponible</h2><button className="eb-button" onClick={()=>{setError('');setPhase('loading');reload().catch(e=>{setError(e.message);setPhase('error')})}}>Réessayer</button></div>}{error && <div className="eb-error" role="alert">{error}<button onClick={()=>setError('')} aria-label="Fermer">×</button></div>}</>;
