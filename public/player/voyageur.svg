@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 560" role="img" aria-labelledby="title desc">
+<title id="title">Voyageur de l’Éclipse Blanche</title><desc id="desc">Aventurier encapuchonné portant une tenue de voyage sombre aux ornements dorés, sans équipement imposé.</desc>
+<defs>
+<radialGradient id="aura"><stop stop-color="#8dbbd1" stop-opacity=".26"/><stop offset=".65" stop-color="#49617d" stop-opacity=".09"/><stop offset="1" stop-color="#25364b" stop-opacity="0"/></radialGradient>
+<linearGradient id="cloak" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#344c64"/><stop offset=".48" stop-color="#182b3e"/><stop offset="1" stop-color="#0c1527"/></linearGradient>
+<linearGradient id="cloth" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#52647a"/><stop offset=".48" stop-color="#29384c"/><stop offset="1" stop-color="#1a2534"/></linearGradient>
+<linearGradient id="metal" x1="0" x2="1"><stop stop-color="#6f7f88"/><stop offset=".42" stop-color="#c1c8c4"/><stop offset=".6" stop-color="#7b868f"/><stop offset="1" stop-color="#3a4c5b"/></linearGradient>
+<linearGradient id="gold" x1="0" x2="1"><stop stop-color="#745632"/><stop offset=".5" stop-color="#dfc68c"/><stop offset="1" stop-color="#8a693b"/></linearGradient>
+<filter id="glow"><feGaussianBlur stdDeviation="7"/></filter>
+</defs>
+<ellipse cx="235" cy="280" rx="200" ry="260" fill="url(#aura)"/>
+<path d="M91 539Q105 369 113 279Q94 247 120 194L162 157Q181 147 196 147H274Q306 147 328 173L366 211Q387 246 362 295L396 540Z" fill="url(#cloak)" stroke="#688299" stroke-opacity=".65" stroke-width="4"/>
+<path d="M103 532Q119 356 154 255L188 226L219 238L162 538Z" fill="#132233" stroke="#4d647b" stroke-width="3"/>
+<path d="M373 532Q356 357 320 251L284 227L252 238L315 538Z" fill="#132233" stroke="#4d647b" stroke-width="3"/>
+<path d="M172 274L210 246L265 246L305 280L298 447L186 450Z" fill="url(#cloth)" stroke="#637386" stroke-width="4"/>
+<path d="M199 290L228 308L255 309L283 290L272 420L207 420Z" fill="#344255" stroke="#9e865e" stroke-width="3"/>
+<path d="M200 342L275 342M198 367L276 367M198 394L273 394" stroke="#8e7756" stroke-opacity=".65" stroke-width="3"/>
+<path d="M169 262Q149 260 127 296L98 412Q90 444 114 454Q138 455 145 428L188 317Z" fill="url(#metal)" stroke="#273748" stroke-width="5"/>
+<path d="M311 261Q333 260 353 296L384 412Q393 445 367 454Q344 454 338 428L294 316Z" fill="url(#metal)" stroke="#273748" stroke-width="5"/>
+<path d="M109 403L153 419L145 439L103 428Z" fill="#263951" stroke="url(#gold)" stroke-width="3"/>
+<path d="M326 418L373 402L381 430L335 439Z" fill="#263951" stroke="url(#gold)" stroke-width="3"/>
+<path d="M103 441Q108 460 126 468L142 451L145 430L111 425Z" fill="#4a5867" stroke="#253447" stroke-width="5"/>
+<path d="M374 441Q371 460 350 468L335 450L332 429L368 425Z" fill="#4a5867" stroke="#253447" stroke-width="5"/>
+<path d="M180 440Q233 452 298 439L310 476L177 476Z" fill="#172437" stroke="url(#gold)" stroke-width="5"/>
+<path d="M228 443L248 443L254 466L222 467Z" fill="url(#gold)" stroke="#292b32" stroke-width="3"/>
+<path d="M207 474L252 474L248 536L183 536Z" fill="#24374a" stroke="#6e7781" stroke-width="3"/>
+<path d="M252 473L286 474L299 536L250 536Z" fill="#1b2e42" stroke="#6e7781" stroke-width="3"/>
+<path d="M176 530L239 530L236 544L167 544ZM246 530L313 530L323 544L247 544Z" fill="#293d50" stroke="url(#gold)" stroke-width="3"/>
+<path d="M155 174Q151 97 190 71Q240 20 289 73Q330 107 324 182L292 238L251 264L225 259L186 236Z" fill="url(#cloak)" stroke="#8893a1" stroke-width="5"/>
+<path d="M188 158Q181 119 206 99Q237 78 267 99Q293 119 290 164L273 217L241 236L209 212Z" fill="#09131f" stroke="#8b9298" stroke-opacity=".75" stroke-width="4"/>
+<path d="M211 174Q231 165 240 167Q250 166 274 172L266 178L243 175L220 182Z" fill="#bfdecf" opacity=".42" filter="url(#glow)"/>
+<path d="M210 174L229 173M248 172L270 174" stroke="#c1d6dd" stroke-width="3" stroke-linecap="round"/>
+<path d="M158 171Q173 198 183 227L209 262L182 288L143 261L122 206Z" fill="#2c4158" stroke="url(#gold)" stroke-width="5"/>
+<path d="M318 172Q304 203 297 226L268 259L296 290L335 260L358 208Z" fill="#2c4158" stroke="url(#gold)" stroke-width="5"/>
+<path d="M168 175Q188 228 234 262Q284 234 311 177" fill="none" stroke="#be9860" stroke-width="3" opacity=".85"/>
+<path d="M193 269L236 306L282 269" fill="none" stroke="url(#gold)" stroke-width="6"/>
+<path d="M228 300L241 300L247 329L234 344L222 327Z" fill="url(#gold)" stroke="#312e32" stroke-width="3"/>
+<path d="M239 304V332" stroke="#f4e5b5" opacity=".7" stroke-width="2"/>
+<ellipse cx="238" cy="546" rx="155" ry="8" fill="#111926" opacity=".5"/>
+</svg>
